@@ -419,7 +419,7 @@ function translatePageContent(langCode) {
             'technologies': 'Technologies:',
             
             // Programming section
-            'programming-section-title': 'Programmation',
+            'programming-section-title': 'Langages/Compétence',
             'no-projects': 'Aucun Projet Hors Scholaire',
             
             // Education section
@@ -482,7 +482,7 @@ function translatePageContent(langCode) {
             'technologies': 'Technologies:',
             
             // Programming section
-            'programming-section-title': 'Programming',
+            'programming-section-title': 'Languages/Skills',
             'no-projects': 'No Non-Academic Projects',
             
             // Education section
