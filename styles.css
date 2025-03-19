@@ -1,0 +1,1216 @@
+html {
+    scroll-behavior: smooth;
+}
+
+:root {
+    --text-color: #000000;
+    --background-color: #FFFFFF;
+    --nav-link-color: #000000;
+    --nav-active-color: #FF69B4; /* Pink color */
+}
+
+[data-theme="dark"] {
+    --text-color: #FFFFFF;
+    --background-color: #3B1949;
+    --nav-link-color: #FFFFFF;
+    --nav-active-color: #FF9FCE; /* Lighter pink for dark mode */
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: Arial, sans-serif;
+    color: var(--text-color);
+    background-color: var(--background-color);
+    transition: background-color 0.5s ease, color 0.5s ease; /* Smoother transition */
+}
+
+/* Theme toggle button */
+.theme-toggle {
+    position: fixed;
+    top: 15px;
+    right: 15px;
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #5A2C73;
+    border: 2px solid #D3D3D3;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.theme-toggle:focus {
+    outline: none;
+}
+
+/* Icon animation using keyframes */
+@keyframes rotate360 {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.theme-toggle i {
+    display: block;
+}
+
+.theme-toggle i.rotate {
+    animation: rotate360 0.5s ease forwards;
+}
+
+/* Dark theme adjustments for toggle */
+[data-theme="dark"] .theme-toggle {
+    background-color: rgba(78, 29, 99, 0.7);
+    color: #FF9FCE;
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .theme-toggle:hover {
+    background-color: rgba(78, 29, 99, 0.9);
+}
+
+/* Background SVGs */
+.background-svg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.light-theme-svg {
+    display: block;
+    opacity: 1;
+}
+
+.dark-theme-svg {
+    display: block;
+    opacity: 0;
+}
+
+[data-theme="dark"] .light-theme-svg {
+    opacity: 0;
+}
+
+[data-theme="dark"] .dark-theme-svg {
+    opacity: 1;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+section {
+    min-height: 50vh;
+    padding-top: 100px;
+}
+
+section h2 {
+    margin-bottom: 50px;
+}
+
+nav {
+    position: fixed;
+    right: 10px;
+    top: 50px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+a{
+    text-decoration: none;
+    color: var(--nav-link-color);
+    transition: color 0.5s ease;
+}
+
+nav a.active {
+    font-weight: bold;
+    color: var(--nav-active-color);
+    transition: color 0.5s ease;
+}
+
+/* Remove list bullets for nav and programming sections */
+nav ul,
+#programmation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-bottom: 10px;
+}
+
+/* New skill boxes */
+.skills-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.skill-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 15px 0;
+    border: 2px solid #D3D3D3;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.skill-box:hover, .project-box:hover, .theme-toggle:hover, .lang-toggle:hover, .other-box:hover, .contact-container:hover, .study-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    border-color: #5A2C73;
+}
+
+/* Dark theme adjustments for box highlighting */
+[data-theme="dark"] .theme-toggle:hover,
+[data-theme="dark"] .lang-toggle:hover,
+[data-theme="dark"] .project-box:hover,
+[data-theme="dark"] .skill-box:hover,
+[data-theme="dark"] .other-box:hover,
+[data-theme="dark"] .contact-container:hover,
+[data-theme="dark"] .study-box:hover {
+    border-color: #FF9FCE;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+}
+
+.skill-box:hover .skill-dot.filled {
+    transform: scale(1.2);
+}
+
+.skill-content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 10px;
+}
+
+.skill-header img {
+    width: 24px;
+    height: 24px;
+}
+
+.skill-header h3 {
+    margin: 0;
+    color: #5A2C73;
+    font-size: 18px;
+}
+
+.skill-description {
+    flex: 1;
+    margin: 8px 0;
+}
+
+.skill-level {
+    margin-top: 10px;
+}
+
+.skill-meter {
+    display: flex;
+    gap: 5px;
+    padding-top: 5px;
+}
+
+.skill-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(90, 44, 115, 0.1);
+    transition: transform 0.3s ease, background-color 0.3s ease;
+}
+
+.skill-dot.filled {
+    background-color: #5A2C73;
+}
+
+.project-link {
+    color: #0066cc;
+    cursor: pointer;
+    font-weight: 500;
+    text-decoration: underline;
+    transition: color 0.3s ease;
+}
+
+.project-link:hover {
+    color: #003366;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .skill-box {
+    background-color: rgba(78, 29, 99, 0.4);
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .skill-box:hover {
+    border-color: #FF9FCE;
+}
+
+[data-theme="dark"] .skill-header h3 {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .skill-dot {
+    background-color: rgba(255, 159, 206, 0.2);
+}
+
+[data-theme="dark"] .skill-dot.filled {
+    background-color: #FF9FCE;
+}
+
+[data-theme="dark"] .project-link {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .project-link:hover {
+    color: #FFFFFF;
+}
+
+/* Staggered animation for filled dots */
+.skill-box:hover .skill-dot.filled:nth-child(1) { transition-delay: 0s; }
+.skill-box:hover .skill-dot.filled:nth-child(2) { transition-delay: 0.05s; }
+.skill-box:hover .skill-dot.filled:nth-child(3) { transition-delay: 0.1s; }
+.skill-box:hover .skill-dot.filled:nth-child(4) { transition-delay: 0.15s; }
+.skill-box:hover .skill-dot.filled:nth-child(5) { transition-delay: 0.2s; }
+
+/* Background SVGs */
+.background-svg {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    pointer-events: none;
+    transition: opacity 1s ease;
+}
+
+.light-theme-svg {
+    display: block;
+    opacity: 1;
+}
+
+.dark-theme-svg {
+    display: block;
+    opacity: 0;
+}
+
+[data-theme="dark"] .light-theme-svg {
+    opacity: 0;
+}
+
+[data-theme="dark"] .dark-theme-svg {
+    opacity: 1;
+}
+
+.container {
+    max-width: 800px;
+    padding: 20px;
+    text-align: center;
+}
+
+section {
+    min-height: 50vh;
+    padding-top: 100px;
+}
+
+section h2 {
+    margin-bottom: 50px;
+}
+
+nav {
+    position: fixed;
+    right: 10px;
+    top: 50px;
+    padding: 10px;
+    border-radius: 8px;
+    text-align: right;
+}
+
+a{
+    text-decoration: none;
+    color: var(--nav-link-color);
+    transition: color 0.5s ease;
+}
+
+nav a.active {
+    font-weight: bold;
+    color: var(--nav-active-color);
+    transition: color 0.5s ease;
+}
+
+/* Remove list bullets for nav and programming sections */
+nav ul,
+#programmation ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+nav li {
+    margin-bottom: 10px;
+}
+
+/* New skill boxes */
+.skills-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 20px;
+    padding: 0 15px;
+    max-width: 900px;
+    margin: 0 auto;
+}
+
+.skill-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    border: 2px solid #D3D3D3;
+    transition: all 0.3s ease;
+    cursor: pointer;
+}
+
+.skill-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.skill-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 12px;
+}
+
+.skill-header h3 {
+    margin: 0;
+    color: #5A2C73;
+    font-size: 18px;
+}
+
+.skill-description {
+    font-size: 14px;
+    color: #000000;
+    line-height: 1.5;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .skill-box {
+    background-color: rgba(78, 29, 99, 0.4);
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .skill-header h3 {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .skill-description {
+    color: #FFFFFF;
+}
+
+.project-link {
+    cursor: pointer;
+    color: #0066cc !important;
+}
+
+.project-link:hover {
+    color: #003366 !important;
+}
+
+/* Updated highlight animation with rounded corners */
+.project-box.highlight {
+    position: relative;
+    z-index: 1;
+    animation: projectHighlightAnimation 1.5s ease;
+}
+
+@keyframes projectHighlightAnimation {
+    0% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    25% { 
+        background-color: rgba(90, 44, 115, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    75% { 
+        background-color: rgba(90, 44, 115, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    100% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Dark theme highlight animation */
+[data-theme="dark"] .project-box.highlight {
+    animation: projectHighlightAnimationDark 1.5s ease;
+}
+
+@keyframes projectHighlightAnimationDark {
+    0% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    25% { 
+        background-color: rgba(255, 159, 206, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    75% { 
+        background-color: rgba(255, 159, 206, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    100% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Dark theme adjustments for project link */
+[data-theme="dark"] .project-link {
+    color: #FF9FCE !important;
+}
+
+[data-theme="dark"] .project-link:hover {
+    color: #FFFFFF !important;
+}
+
+.study-box-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    margin: 20px auto;
+    max-width: 450px;
+    cursor: pointer;
+}
+
+.study-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 15px 0;
+    border: 2px solid #D3D3D3;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.study-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+}
+
+.study-box img {
+    width: 100%;
+    max-width: 400px;
+    border-radius: 10px;
+    margin-top: 15px;
+}
+
+/* Dark theme adjustments for study box */
+[data-theme="dark"] .study-box {
+    background-color: rgba(78, 29, 99, 0.4);
+    border-color: #6E3384;
+}
+
+/* Project Boxes */
+.project-box-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 30px;
+    margin: 0 auto;
+}
+
+.project-box-link {
+    text-decoration: none;
+    color: inherit;
+    display: block;
+    width: 100%;
+    max-width: 550px;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+@media (min-width: 992px) {
+    .project-box-link {
+        max-width: 45%;
+    }
+}
+
+.project-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 15px 0;
+    border: 2px solid #D3D3D3;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.project-content {
+    transition: all 0.3s ease;
+}
+
+.project-tech {
+    margin-top: 15px;
+    border-top: 1px solid #D3D3D3;
+    padding-top: 15px;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    transition: all 0.4s ease;
+}
+
+.project-box:hover .project-tech {
+    opacity: 1;
+    height: auto;
+}
+
+.project-box h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #5A2C73;
+    font-size: 22px;
+}
+
+.project-description {
+    margin-bottom: 15px;
+    line-height: 1.5;
+}
+
+.project-view-link {
+    display: inline-block;
+    color: #5A2C73; /* Match the heading color in light mode */
+    font-weight: 500;
+    transition: color 0.3s ease, transform 0.3s ease;
+}
+
+.project-box:hover .project-view-link {
+    transform: translateX(8px); /* Move right by 8px on hover */
+    color: #5A2C73; /* Keep the same color on hover in light mode */
+}
+
+/* Dark theme adjustments for project view link */
+[data-theme="dark"] .project-view-link {
+    color: #FF9FCE; /* Pink color in dark mode */
+}
+
+[data-theme="dark"] .project-box:hover .project-view-link {
+    color: #FF9FCE; /* Keep the same pink color on hover in dark mode */
+}
+
+.project-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.tech-label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 8px;
+    color: #5A2C73;
+}
+
+.tech-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.tech-item {
+    background-color: rgba(90, 44, 115, 0.1);
+    border-radius: 15px;
+    padding: 5px 12px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .project-box {
+    background-color: rgba(78, 29, 99, 0.4);
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .project-box h3 {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .tech-label {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .project-tech {
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .tech-item {
+    background-color: rgba(255, 159, 206, 0.2);
+}
+
+[data-theme="dark"] .project-view-link {
+    color: #FF9FCE; /* Match the heading color in dark mode */
+}
+
+/* Remove focus outline on project elements */
+.project-box-link:focus,
+.project-box:focus {
+    outline: none;
+}
+
+/* Updated highlight animation with proper containment */
+.project-box.highlight {
+    position: relative;
+    z-index: 1;
+    animation: projectHighlightAnimation 1.5s ease;
+    /* No need for overflow: hidden since .project-box already has border-radius */
+}
+
+@keyframes projectHighlightAnimation {
+    0% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    25% { 
+        background-color: rgba(90, 44, 115, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    75% { 
+        background-color: rgba(90, 44, 115, 0.15);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+    }
+    100% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Dark theme highlight animation */
+[data-theme="dark"] .project-box.highlight {
+    animation: projectHighlightAnimationDark 1.5s ease;
+}
+
+@keyframes projectHighlightAnimationDark {
+    0% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+    25% { 
+        background-color: rgba(255, 159, 206, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    75% { 
+        background-color: rgba(255, 159, 206, 0.2);
+        transform: translateY(-5px);
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    }
+    100% { 
+        background-color: transparent;
+        transform: translateY(0);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    }
+}
+
+/* Project Header and Scale styling */
+.project-header {
+    margin-bottom: 10px;
+    text-align: center;
+}
+
+.project-header h3 {
+    margin: 0 0 8px 0;
+    font-size: 20px;
+    color: #5A2C73;
+}
+
+.project-scale {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 15px auto;
+}
+
+.scale-label {
+    font-size: 14px;
+    color: #666;
+}
+
+.scale-meter {
+    display: flex;
+    gap: 3px;
+}
+
+.scale-dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background-color: rgba(90, 44, 115, 0.1);
+    transition: all 0.3s ease;
+}
+
+.scale-dot.filled {
+    background-color: #5A2C73;
+}
+
+.scale-value {
+    font-size: 14px;
+    font-weight: 500;
+    color: #5A2C73;
+}
+
+/* Dark theme adjustments for project header and scale */
+[data-theme="dark"] .project-header h3 {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .scale-label {
+    color: #ccc;
+}
+
+[data-theme="dark"] .scale-dot {
+    background-color: rgba(255, 159, 206, 0.2);
+}
+
+[data-theme="dark"] .scale-dot.filled {
+    background-color: #FF9FCE;
+}
+
+[data-theme="dark"] .scale-value {
+    color: #FF9FCE;
+}
+
+/* Animation for scale dots on hover */
+.project-box:hover .scale-dot.filled {
+    transform: scale(1.2);
+    transition-delay: 0.1s;
+}
+
+/* Staggered animation delays for dots */
+.project-box:hover .scale-dot.filled:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.project-box:hover .scale-dot.filled:nth-child(2) {
+    transition-delay: 0.05s;
+}
+
+.project-box:hover .scale-dot.filled:nth-child(3) {
+    transition-delay: 0.1s;
+}
+
+.project-box:hover .scale-dot.filled:nth-child(4) {
+    transition-delay: 0.15s;
+}
+
+.project-box:hover .scale-dot.filled:nth-child(5) {
+    transition-delay: 0.2s;
+}
+
+/* Contact Section */
+.contact-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    margin: 20px auto;
+    max-width: 450px;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    border: 2px solid #D3D3D3;
+    transition: transform 0.3s ease;
+}
+
+.contact-container:hover {
+    transform: translateY(-5px);
+}
+
+.contact-container p {
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.contact-container i {
+    color: #5A2C73;
+    font-size: 18px;
+}
+
+.contact-container a {
+    color: #5A2C73;
+    text-decoration: none;
+    transition: color 0.3s ease;
+}
+
+.contact-container a:hover {
+    text-decoration: underline;
+    color: #3A1D49;
+}
+
+/* Dark theme adjustments for contact section */
+[data-theme="dark"] .contact-container {
+    background-color: rgba(78, 29, 99, 0.4);
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .contact-container i,
+[data-theme="dark"] .contact-container a {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .contact-container a:hover {
+    color: #FFFFFF;
+}
+
+/* Other Section Styling */
+.other-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    padding: 25px;
+    margin: 15px 0;
+    border: 2px solid #D3D3D3;
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+}
+
+.other-box:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.other-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+    gap: 10px;
+}
+
+.other-header i {
+    color: #5A2C73;
+    font-size: 20px;
+}
+
+.other-header h3 {
+    margin: 0;
+    color: #5A2C73;
+}
+
+.other-details {
+    padding-left: 30px;
+}
+
+.language-item {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    gap: 15px;
+}
+
+.language-name {
+    font-weight: 600;
+    width: 80px;
+}
+
+.language-level {
+    display: flex;
+    gap: 4px;
+}
+
+.level-dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background-color: rgba(90, 44, 115, 0.2);
+}
+
+.level-dot.filled {
+    background-color: #5A2C73;
+}
+
+.language-proficiency {
+    font-size: 14px;
+    color: #666;
+    margin-left: 10px;
+}
+
+.interest-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.interest-item {
+    background-color: rgba(90, 44, 115, 0.1);
+    border-radius: 15px;
+    padding: 5px 12px;
+    font-size: 13px;
+    display: inline-block;
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .other-box {
+    background-color: rgba(78, 29, 99, 0.4);
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .other-header i,
+[data-theme="dark"] .other-header h3 {
+    color: #FF9FCE;
+}
+
+[data-theme="dark"] .level-dot.filled {
+    background-color: #FF9FCE;
+}
+
+[data-theme="dark"] .level-dot {
+    background-color: rgba(255, 159, 206, 0.2);
+}
+
+[data-theme="dark"] .interest-item {
+    background-color: rgba(255, 159, 206, 0.2);
+}
+
+[data-theme="dark"] .language-proficiency {
+    color: #ccc;
+}
+
+/* Profile image styling */
+.profile-image-link {
+    display: inline-block;
+    margin-left: 10px;
+    vertical-align: middle;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #5A2C73;
+    transform-origin: center center;
+    transition: all 0.3s ease;
+    object-fit: cover;
+    vertical-align: middle;
+}
+
+.profile-image:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 10px rgba(90, 44, 115, 0.6);
+}
+
+/* Dark theme adjustments for profile image */
+[data-theme="dark"] .profile-image {
+    border-color: #FF9FCE;
+}
+
+[data-theme="dark"] .profile-image:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 10px rgba(255, 159, 206, 0.6);
+}
+
+/* Language toggle button */
+.lang-toggle {
+    position: fixed;
+    top: 15px;
+    right: 65px; /* Position to the left of the theme toggle */
+    z-index: 100;
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #5A2C73;
+    border: 2px solid #D3D3D3;
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.lang-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.9);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.lang-toggle:focus {
+    outline: none;
+}
+
+.lang-toggle i {
+    display: block;
+}
+
+.lang-toggle .lang-indicator {
+    font-size: 12px;
+    font-weight: bold;
+    position: absolute;
+    bottom: 4px;
+    right: 4px;
+}
+
+.lang-toggle i.rotate {
+    animation: rotate360 0.5s ease forwards;
+}
+
+/* Dark theme adjustments for language toggle */
+[data-theme="dark"] .lang-toggle {
+    background-color: rgba(78, 29, 99, 0.7);
+    color: #FF9FCE;
+    border-color: #6E3384;
+}
+
+[data-theme="dark"] .lang-toggle:hover {
+    background-color: rgba(78, 29, 99, 0.9);
+}
+
+/* Header container styling */
+.header-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.header-container h1 {
+    margin: 0;
+    display: inline-block; /* Allow the absolute positioning to be relative to the text width */
+    position: relative;
+}
+
+.profile-image-link {
+    position: absolute;
+    right: 150px; /* Position it to the right of the title */
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+}
+
+.profile-image {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid #5A2C73;
+    transform-origin: center center;
+    transition: all 0.5s ease;
+}
+
+.profile-image:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 10px rgba(90, 44, 115, 0.6);
+}
+
+/* Dark theme adjustments for profile image */
+[data-theme="dark"] .profile-image {
+    border-color: #FF9FCE;
+}
+
+[data-theme="dark"] .profile-image:hover {
+    transform: scale(1.1) rotate(5deg);
+    box-shadow: 0 0 10px rgba(255, 159, 206, 0.6);
+}
+
+/* Welcome container styling (matching header-container style) */
+.welcome-container {
+    position: relative;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.welcome-text {
+    margin: 0;
+    display: inline-block;
+    position: relative;
+}
+
+.welcome-icon {
+    position: absolute;
+    right: 175px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: block;
+}
+
+.welcome-icon i {
+    font-size: 1.2em;
+    color: var(--text-color);
+    transition: all 0.3s ease;
+}
+
+/* Hover effect matching profile image */
+.welcome-icon:hover i {
+    transform: scale(1.1);
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6)); /* Changed to red glow */
+}
+
+/* Dark theme adjustments */
+[data-theme="dark"] .welcome-icon:hover i {
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6)); /* Changed to red glow in dark mode */
+}
