@@ -289,6 +289,116 @@ document.addEventListener('DOMContentLoaded', (event) => {
     document.addEventListener('click', function(event) {
         // Empty handler, kept for compatibility in case you decide to add dropdowns again
     });
+
+    // Anti-scraping protection for contact information
+    const emailLink = document.getElementById('email-link');
+    if (emailLink) {
+        emailLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const email = 'henri' + '@' + 'saumure.com';
+            window.location.href = 'mailto:' + email;
+        });
+    }
+    
+    const phoneLink = document.getElementById('phone-link');
+    if (phoneLink) {
+        phoneLink.addEventListener('click', function(e) {
+            e.preventDefault();
+            const phone = '+1' + '514' + '2349707';
+            window.location.href = 'tel:' + phone;
+        });
+    }
+
+    // Initialize contact protection after DOM is loaded
+    initContactProtection();
+
+    // Scroll down arrow functionality
+    const scrollArrow = document.getElementById('scrollArrow');
+    
+    if (scrollArrow) {
+        // Variable to track which section is currently in view
+        let currentSectionIndex = 0;
+        const sections = document.querySelectorAll('section');
+        
+        // Function to handle periodic bouncing
+        const startBouncingAnimation = () => {
+            // Start bouncing after 5 seconds
+            setTimeout(() => {
+                // Bounce a few times
+                for (let i = 0; i < 3; i++) {
+                    setTimeout(() => {
+                        scrollArrow.classList.add('bounce');
+                        
+                        // Remove the class after the animation completes
+                        setTimeout(() => {
+                            scrollArrow.classList.remove('bounce');
+                        }, 2000); // Animation duration
+                        
+                    }, i * 2500); // Stagger each bounce
+                }
+                
+                // Restart the whole process after a longer pause
+                setTimeout(startBouncingAnimation, 15000); // 15 second pause before starting again
+                
+            }, 5000); // Initial 5 second delay
+        };
+        
+        // Start the periodic bouncing
+        startBouncingAnimation();
+        
+        // Click handler to scroll to next section
+        scrollArrow.addEventListener('click', () => {
+            // Find the next section
+            let targetIndex = 0;
+            
+            // Get current scroll position
+            const scrollPosition = window.scrollY + 100; // Add small offset
+            
+            // Find which section we're currently viewing
+            for (let i = 0; i < sections.length; i++) {
+                const section = sections[i];
+                const sectionTop = section.offsetTop;
+                const sectionBottom = sectionTop + section.offsetHeight;
+                
+                if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+                    currentSectionIndex = i;
+                    break;
+                }
+            }
+            
+            // Target the next section, or loop back to the first if at the end
+            targetIndex = (currentSectionIndex + 1) % sections.length;
+            
+            // Scroll to the target section
+            sections[targetIndex].scrollIntoView({ 
+                behavior: 'smooth',
+                block: 'start' 
+            });
+        });
+        
+        // Hide arrow when user has scrolled to the last section
+        window.addEventListener('scroll', () => {
+            // Get current scroll position
+            const scrollPosition = window.scrollY;
+            const docHeight = document.body.scrollHeight;
+            const windowHeight = window.innerHeight;
+            
+            // Determine if we're at or near the bottom of the page
+            const isNearBottom = (scrollPosition + windowHeight) >= (docHeight - 100);
+            
+            if (isNearBottom) {
+                // Hide the arrow at the bottom of the page
+                scrollArrow.style.opacity = '0';
+                setTimeout(() => {
+                    scrollArrow.style.pointerEvents = 'none';
+                }, 300);
+            } else {
+                // Show the arrow otherwise
+                scrollArrow.style.opacity = '0.8';
+                scrollArrow.style.pointerEvents = 'auto';
+            }
+        });
+    }
 });
 
 // Project navigation function (fixed)
@@ -450,7 +560,13 @@ function translatePageContent(langCode) {
             'contact-section-title': 'Contact',
             'email': 'Email',
             'phone': 'Téléphone',
-            'profile-photo': 'Photo de profil'
+            'show-email': 'Afficher l\'email',
+            'show-phone': 'Afficher le téléphone',
+            'captcha-title': 'Vérification',
+            'captcha-instruction': 'Pour voir les informations de contact, veuillez résoudre ce simple calcul:',
+            'captcha-submit': 'Vérifier',
+            'captcha-cancel': 'Annuler',
+            'captcha-error': 'Réponse incorrecte, veuillez réessayer'
         },
         'en': {
             // Add page title
@@ -513,7 +629,13 @@ function translatePageContent(langCode) {
             'contact-section-title': 'Contact',
             'email': 'Email',
             'phone': 'Phone',
-            'profile-photo': 'Profile photo'
+            'show-email': 'Show email',
+            'show-phone': 'Show phone',
+            'captcha-title': 'Verification',
+            'captcha-instruction': 'To view contact information, please solve this simple math problem:',
+            'captcha-submit': 'Verify',
+            'captcha-cancel': 'Cancel',
+            'captcha-error': 'Incorrect answer, please try again'
         }
     };
     
@@ -567,4 +689,204 @@ function translatePageContent(langCode) {
             el.title = translations[langCode][key];
         }
     });
+}
+
+// Enhanced anti-scraping protection for contact information
+function initContactProtection() {
+    console.log('Initializing contact protection');
+    
+    // Get the current language using the SAME logic as your main app
+    // This ensures consistency between your main app and the CAPTCHA modal
+    const savedLanguage = localStorage.getItem('language');
+    const userLang = navigator.language || navigator.userLanguage;
+    const prefersFrench = userLang.startsWith('fr');
+    
+    // Determine language in the same way as the main site
+    let currentLang;
+    if (savedLanguage) {
+        console.log('CAPTCHA using saved language preference:', savedLanguage);
+        currentLang = savedLanguage;
+    } else if (prefersFrench) {
+        console.log('CAPTCHA using browser preference: French');
+        currentLang = 'fr';
+    } else {
+        console.log('CAPTCHA defaulting to English');
+        currentLang = 'en';
+    }
+    
+    // Get translation keys based on current language
+    const translations = {
+        'fr': {
+            'captcha-title': 'Vérification',
+            'captcha-instruction': 'Pour voir les informations de contact, veuillez résoudre ce simple calcul:',
+            'captcha-submit': 'Vérifier',
+            'captcha-cancel': 'Annuler',
+            'captcha-error': 'Réponse incorrecte, veuillez réessayer'
+        },
+        'en': {
+            'captcha-title': 'Verification',
+            'captcha-instruction': 'To view contact information, please solve this simple math problem:',
+            'captcha-submit': 'Verify',
+            'captcha-cancel': 'Cancel',
+            'captcha-error': 'Incorrect answer, please try again'
+        }
+    };
+    
+    const t = translations[currentLang] || translations['en'];
+    
+    // Create and inject the CAPTCHA modal into the DOM if it doesn't exist
+    if (!document.getElementById('captcha-modal')) {
+        const modalHTML = `
+            <div id="captcha-modal" class="captcha-modal">
+                <div class="captcha-container">
+                    <h3 data-translate-key="captcha-title">${t['captcha-title']}</h3>
+                    <p data-translate-key="captcha-instruction">${t['captcha-instruction']}</p>
+                    <div id="captcha-challenge" class="captcha-challenge"></div>
+                    <input type="number" id="captcha-answer" class="captcha-input" placeholder="?" min="0" max="100">
+                    <div class="captcha-buttons">
+                        <button id="captcha-submit" class="captcha-submit" data-translate-key="captcha-submit">${t['captcha-submit']}</button>
+                        <button id="captcha-cancel" class="captcha-cancel" data-translate-key="captcha-cancel">${t['captcha-cancel']}</button>
+                    </div>
+                    <p id="captcha-error" style="color: var(--accent-color); display: none;" data-translate-key="captcha-error">${t['captcha-error']}</p>
+                </div>
+            </div>
+        `;
+        document.body.insertAdjacentHTML('beforeend', modalHTML);
+        console.log('CAPTCHA modal created with language:', currentLang); // Debug log
+    } else {
+        console.log('CAPTCHA modal already exists'); // Debug log
+    }
+    
+    // Get all the elements
+    const captchaModal = document.getElementById('captcha-modal');
+    const captchaChallenge = document.getElementById('captcha-challenge');
+    const captchaAnswer = document.getElementById('captcha-answer');
+    const captchaSubmit = document.getElementById('captcha-submit');
+    const captchaCancel = document.getElementById('captcha-cancel');
+    const captchaError = document.getElementById('captcha-error');
+    
+    // Email details
+    const emailBtn = document.getElementById('show-email-btn');
+    const emailDisplay = document.getElementById('email-display');
+    
+    // Phone details
+    const phoneBtn = document.getElementById('show-phone-btn');
+    const phoneDisplay = document.getElementById('phone-display');
+    
+    // Log element availability for debugging
+    console.log('Elements found:', {
+        captchaModal: !!captchaModal,
+        emailBtn: !!emailBtn,
+        emailDisplay: !!emailDisplay,
+        phoneBtn: !!phoneBtn,
+        phoneDisplay: !!phoneDisplay
+    });
+    
+    // Variables for CAPTCHA
+    let currentCaptchaAnswer = 0;
+    let contactType = '';
+    
+    // Generate a random math problem
+    function generateCaptcha() {
+        const num1 = Math.floor(Math.random() * 10) + 1;
+        const num2 = Math.floor(Math.random() * 10) + 1;
+        currentCaptchaAnswer = num1 + num2;
+        captchaChallenge.textContent = `${num1} + ${num2} = ?`;
+        captchaAnswer.value = '';
+        captchaError.style.display = 'none';
+    }
+    
+    // Show CAPTCHA modal
+    function showCaptcha(type) {
+        contactType = type;
+        generateCaptcha();
+        captchaModal.style.display = 'flex';
+        captchaAnswer.focus();
+    }
+    
+    // Hide CAPTCHA modal
+    function hideCaptcha() {
+        captchaModal.style.display = 'none';
+    }
+    
+    // Verify CAPTCHA answer and show contact info if correct
+    function verifyCaptcha() {
+        const userAnswer = parseInt(captchaAnswer.value, 10);
+        
+        if (userAnswer === currentCaptchaAnswer) {
+            hideCaptcha();
+            
+            if (contactType === 'email') {
+                // Email components
+                const emailParts = ['henri', 'saumure.com'];
+                const emailBtn = document.getElementById('show-email-btn');
+                const emailDisplay = document.getElementById('email-display');
+                
+                // Show email
+                if (emailBtn && emailDisplay) {
+                    emailBtn.style.display = 'none';
+                    emailDisplay.style.display = 'inline';
+                    emailDisplay.innerHTML = `<a href="mailto:${emailParts[0]}@${emailParts[1]}" class="contact-info">${emailParts[0]}@${emailParts[1]}</a>`;
+                    console.log('Email displayed successfully');
+                }
+            } else if (contactType === 'phone') {
+                // Phone components
+                const phoneParts = ['514', '234', '9707'];
+                const phoneBtn = document.getElementById('show-phone-btn');
+                const phoneDisplay = document.getElementById('phone-display');
+                
+                // Show phone
+                if (phoneBtn && phoneDisplay) {
+                    phoneBtn.style.display = 'none';
+                    phoneDisplay.style.display = 'inline';
+                    const formattedPhone = `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
+                    phoneDisplay.innerHTML = `<a href="tel:+1${phoneParts[0]}${phoneParts[1]}${phoneParts[2]}" class="contact-info">${formattedPhone}</a>`;
+                    console.log('Phone displayed successfully');
+                }
+            }
+        } else {
+            captchaError.style.display = 'block';
+            generateCaptcha();
+        }
+    }
+    
+    // Only add event listeners if elements exist
+    if (emailBtn) {
+        emailBtn.addEventListener('click', () => {
+            console.log('Email button clicked'); // Debug log
+            showCaptcha('email');
+        });
+    }
+    
+    if (phoneBtn) {
+        phoneBtn.addEventListener('click', () => {
+            console.log('Phone button clicked'); // Debug log
+            showCaptcha('phone');
+        });
+    }
+    
+    if (captchaSubmit) {
+        captchaSubmit.addEventListener('click', verifyCaptcha);
+    }
+    
+    if (captchaCancel) {
+        captchaCancel.addEventListener('click', hideCaptcha);
+    }
+    
+    if (captchaAnswer) {
+        // Allow Enter key to submit
+        captchaAnswer.addEventListener('keyup', (e) => {
+            if (e.key === 'Enter') verifyCaptcha();
+            if (e.key === 'Escape') hideCaptcha();
+        });
+    }
+    
+    if (captchaModal) {
+        // Close modal if clicking outside
+        captchaModal.addEventListener('click', (e) => {
+            if (e.target === captchaModal) hideCaptcha();
+        });
+    }
+    
+    console.log('Contact protection initialized'); // Debug log
 }

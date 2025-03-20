@@ -72,6 +72,12 @@
         <i class="fa-solid fa-bug"></i>
     </a>
 </div>
+<!-- Add this right after the welcome container, before the first section -->
+<div class="scroll-arrow-container">
+    <button id="scrollArrow" class="scroll-arrow" aria-label="Scroll to next section">
+        <i class="fas fa-chevron-down"></i>
+    </button>
+</div>
         <section id="projets">
             <h2 data-translate-key="project-section-title">Projets</h2>
             <div class="project-box-container">
@@ -579,8 +585,14 @@
         <section id="contact">
             <h2 data-translate-key="contact-section-title">Contact</h2>
             <div class="contact-container">
-                <p><i class="fa-solid fa-envelope"></i> <span data-translate-key="email">Email</span>: <a href="mailto:henri@saumure.com">henri@saumure.com</a></p>
-                <p><i class="fa-solid fa-phone"></i> <span data-translate-key="phone">Téléphone</span>: <a href="tel:+15142349707">(514) 234-9707</a></p>
+                <p><i class="fa-solid fa-envelope"></i> <span data-translate-key="email">Email</span>: 
+                    <button id="show-email-btn" class="captcha-btn" data-translate-key="show-email">Afficher l'email</button>
+                    <span id="email-display" class="hidden-contact"></span>
+                </p>
+                <p><i class="fa-solid fa-phone"></i> <span data-translate-key="phone">Téléphone</span>: 
+                    <button id="show-phone-btn" class="captcha-btn" data-translate-key="show-phone">Afficher le téléphone</button>
+                    <span id="phone-display" class="hidden-contact"></span>
+                </p>
             </div>
         </section>
     </div>
