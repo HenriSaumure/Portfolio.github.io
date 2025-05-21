@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="fr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title data-translate-key="page-title">Mon Portfolio</title>
+    <title data-translate-key="page-title"></title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/x-icon" href="images/Github Pro Account Profile Picture.png">
     <script src="javascript.js" defer></script>
     <script src="https://kit.fontawesome.com/15d9254926.js" crossorigin="anonymous"></script>
 </head>
+
 <body>
     <!-- Language toggle button -->
     <button class="lang-toggle" id="langToggle" aria-label="Toggle French/English language">
@@ -21,26 +24,17 @@
 
     <!-- Background SVGs -->
     <div class="background-svg dark-theme-svg">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1440 560">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.dev/svgjs" width="100%" height="100%" preserveAspectRatio="none"
+            viewBox="0 0 1440 560">
             <g mask="url(&quot;#SvgjsMask1021&quot;)" fill="none">
                 <rect width="1440" height="560" x="0" y="0" fill="rgba(59, 25, 73, 1)"></rect>
-                <path d="M 0,212 C 96,174 288,34.8 480,22 C 672,9.2 768,130.2 960,148 C 1152,165.8 1344,118.4 1440,111L1440 560L0 560z" fill="rgba(78, 29, 99, 1)"></path>
-                <path d="M 0,396 C 96,413.8 288,490 480,485 C 672,480 768,381.4 960,371 C 1152,360.6 1344,420.6 1440,433L1440 560L0 560z" fill="rgba(105, 45, 130, 1)"></path>
-            </g>
-            <defs>
-                <mask id="SvgjsMask1021">
-                    <rect width="1440" height="560" fill="#ffffff"></rect>
-                </mask>
-            </defs>
-        </svg>
-    </div>
-    
-    <div class="background-svg light-theme-svg">
-        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:svgjs="http://svgjs.dev/svgjs" width="100%" height="100%" preserveAspectRatio="none" viewBox="0 0 1440 560">
-            <g mask="url(#SvgjsMask1021)" fill="none">
-                <rect width="1440" height="560" x="0" y="0" fill="rgba(240, 230, 255, 1)"></rect>
-                <path d="M 0,212 C 96,174 288,34.8 480,22 C 672,9.2 768,130.2 960,148 C 1152,165.8 1344,118.4 1440,111L1440 560L0 560z" fill="rgba(210, 190, 245, 1)"></path>
-                <path d="M 0,396 C 96,413.8 288,490 480,485 C 672,480 768,381.4 960,371 C 1152,360.6 1344,420.6 1440,433L1440 560L0 560z" fill="rgba(180, 150, 230, 1)"></path>
+                <path
+                    d="M 0,212 C 96,174 288,34.8 480,22 C 672,9.2 768,130.2 960,148 C 1152,165.8 1344,118.4 1440,111L1440 560L0 560z"
+                    fill="rgba(78, 29, 99, 1)"></path>
+                <path
+                    d="M 0,396 C 96,413.8 288,490 480,485 C 672,480 768,381.4 960,371 C 1152,360.6 1344,420.6 1440,433L1440 560L0 560z"
+                    fill="rgba(105, 45, 130, 1)"></path>
             </g>
             <defs>
                 <mask id="SvgjsMask1021">
@@ -50,7 +44,28 @@
         </svg>
     </div>
 
-    <nav>       
+    <div class="background-svg light-theme-svg">
+        <svg xmlns="http://www.w3.org/2000/svg" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink"
+            xmlns:svgjs="http://svgjs.dev/svgjs" width="100%" height="100%" preserveAspectRatio="none"
+            viewBox="0 0 1440 560">
+            <g mask="url(#SvgjsMask1021)" fill="none">
+                <rect width="1440" height="560" x="0" y="0" fill="rgba(240, 230, 255, 1)"></rect>
+                <path
+                    d="M 0,212 C 96,174 288,34.8 480,22 C 672,9.2 768,130.2 960,148 C 1152,165.8 1344,118.4 1440,111L1440 560L0 560z"
+                    fill="rgba(210, 190, 245, 1)"></path>
+                <path
+                    d="M 0,396 C 96,413.8 288,490 480,485 C 672,480 768,381.4 960,371 C 1152,360.6 1344,420.6 1440,433L1440 560L0 560z"
+                    fill="rgba(180, 150, 230, 1)"></path>
+            </g>
+            <defs>
+                <mask id="SvgjsMask1021">
+                    <rect width="1440" height="560" fill="#ffffff"></rect>
+                </mask>
+            </defs>
+        </svg>
+    </div>
+
+    <nav>
         <div><a href="#projets" data-translate-key="projets">Projets</a></div>
         <div><a href="#programmation" data-translate-key="programmation">Langages/Compétence</a></div>
         <div><a href="#etudes" data-translate-key="etudes">Études</a></div>
@@ -61,23 +76,26 @@
     <div class="container">
         <div class="header-container">
             <h1 data-translate-key="portfolio-title">Portfolio Henri Saumure</h1>
-            <a href="https://github.com/HenriSaumure" target="_blank" class="profile-image-link" data-translate-key-title="visit-github" title="Visiter mon profil GitHub">
-                <img src="https://avatars.githubusercontent.com/u/169080985?v=4" alt="Photo de profil" class="profile-image" data-translate-key-alt="profile-photo">
+            <a href="https://github.com/HenriSaumure" target="_blank" class="profile-image-link"
+                data-translate-key-title="visit-github" title="Visiter mon profil GitHub">
+                <img src="https://avatars.githubusercontent.com/u/169080985?v=4" alt="Photo de profil"
+                    class="profile-image" data-translate-key-alt="profile-photo">
             </a>
         </div>
-        <!-- Replace the current welcome message with this -->
-<div class="welcome-container">
-    <p class="welcome-text" data-translate-key="welcome">Bienvenue ! Vous trouverez ici tout ce que j'ai réalisé</p>
-    <a class="welcome-icon">
-        <i class="fa-solid fa-bug"></i>
-    </a>
-</div>
-<!-- Add this right after the welcome container, before the first section -->
-<div class="scroll-arrow-container">
-    <button id="scrollArrow" class="scroll-arrow" aria-label="Scroll to next section">
-        <i class="fas fa-chevron-down"></i>
-    </button>
-</div>
+
+        <div class="welcome-container">
+            <p class="welcome-text" data-translate-key="welcome">Bienvenue ! Vous trouverez ici tout ce que j'ai réalisé
+            </p>
+            <a class="welcome-icon">
+                <i class="fa-solid fa-bug"></i>
+            </a>
+        </div>
+
+        <div class="scroll-arrow-container">
+            <button id="scrollArrow" class="scroll-arrow" aria-label="Scroll to next section">
+                <i class="fas fa-chevron-down"></i>
+            </button>
+        </div>
         <section id="projets">
             <h2 data-translate-key="project-section-title">Projets</h2>
             <div class="project-box-container">
@@ -98,7 +116,8 @@
                                 </div>
                                 <span class="scale-value" data-translate-key="large">Large</span>
                             </div>
-                            <p class="project-description" data-translate-key="choculaterie-desc">Site web de partage de création pour le jeux Minecraft</p>
+                            <p class="project-description" data-translate-key="choculaterie-desc">Site web de partage de
+                                création pour le jeux Minecraft</p>
                             <div class="project-view-link" data-translate-key="visit-site">
                                 Visiter le site <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -121,9 +140,10 @@
                         </div>
                     </div>
                 </a>
-                
+
                 <!-- Chat App Project -->
-                <a id="chatapp-project" href="https://github.com/HenriSaumure/chat-app" target="_blank" class="project-box-link">
+                <a id="chatapp-project" href="https://github.com/HenriSaumure/chat-app" target="_blank"
+                    class="project-box-link">
                     <div class="project-box">
                         <div class="project-content">
                             <div class="project-header">
@@ -140,7 +160,8 @@
                                 </div>
                                 <span class="scale-value" data-translate-key="small">Petit</span>
                             </div>
-                            <p class="project-description" data-translate-key="chatapp-desc">Application de messagerie sécurisée qui utilise le stockage RAM pour ne pas laisser de traces des messages</p>
+                            <p class="project-description" data-translate-key="chatapp-desc">Application de messagerie
+                                sécurisée qui utilise le stockage RAM pour ne pas laisser de traces des messages</p>
                             <div class="project-view-link" data-translate-key="view-github">
                                 Voir sur GitHub <i class="fa-solid fa-arrow-right"></i>
                             </div>
@@ -183,7 +204,8 @@
                         </div>
                         <div class="skill-description">
                             <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span>, 
+                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
                                 <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
                             </p>
                         </div>
@@ -206,7 +228,8 @@
                         </div>
                         <div class="skill-description">
                             <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
+                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
                                 <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
                             </p>
                         </div>
@@ -229,7 +252,8 @@
                         </div>
                         <div class="skill-description">
                             <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span>, 
+                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
                                 <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
                             </p>
                         </div>
@@ -251,7 +275,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -271,7 +296,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -291,7 +317,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -312,7 +339,8 @@
                         </div>
                         <div class="skill-description">
                             <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
+                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
                                 <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
                             </p>
                         </div>
@@ -334,7 +362,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -354,7 +383,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -374,7 +404,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -414,7 +445,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')" data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
+                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
                         </div>
                     </div>
                 </div>
@@ -434,7 +466,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -454,7 +487,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -474,7 +508,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -494,7 +529,8 @@
                             </div>
                         </div>
                         <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span></p>
+                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
+                            </p>
                         </div>
                     </div>
                 </div>
@@ -503,7 +539,8 @@
 
         <section id="etudes">
             <h2 data-translate-key="education-section-title">Études</h2>
-            <a href="https://programmes.cegepmontpetit.ca/programme/tech/techniques-de-linformatique-programmation-ou-reseautique/" target="_blank" class="study-box-link">
+            <a href="https://programmes.cegepmontpetit.ca/programme/tech/techniques-de-linformatique-programmation-ou-reseautique/"
+                target="_blank" class="study-box-link">
                 <div class="study-box">
                     <h3 data-translate-key="cegep-title">Cégep Édouard-Montpetit</h3>
                     <p data-translate-key="tech-info">Techniques de l'informatique</p>
@@ -533,7 +570,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="other-box">
                     <div class="other-content">
                         <div class="other-header">
@@ -543,12 +580,13 @@
                         <div class="other-details">
                             <div class="certification-item">
                                 <span class="certification-badge"><i class="fa-solid fa-code"></i></span>
-                                <span class="certification-name" data-translate-key="programming-cert">420 B.A Programmation</span>
+                                <span class="certification-name" data-translate-key="programming-cert">420 B.A
+                                    Programmation</span>
                             </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="other-box">
                     <div class="other-content">
                         <div class="other-header">
@@ -562,11 +600,11 @@
                                 <span class="interest-item" data-translate-key="local-hosting">Hébergement Local</span>
                                 <span class="interest-item" data-translate-key="home-automation">Domotique</span>
                                 <span class="interest-item" data-translate-key="robotics">Robotique</span>
-                            </div>                            
+                            </div>
                         </div>
                     </div>
                 </div>
-                
+
                 <div class="other-box">
                     <div class="other-content">
                         <div class="other-header">
@@ -585,16 +623,19 @@
         <section id="contact">
             <h2 data-translate-key="contact-section-title">Contact</h2>
             <div class="contact-container">
-                <p><i class="fa-solid fa-envelope"></i> <span data-translate-key="email">Email</span>: 
-                    <button id="show-email-btn" class="captcha-btn" data-translate-key="show-email">Afficher l'email</button>
+                <p><i class="fa-solid fa-envelope"></i> <span data-translate-key="email">Email</span>:
+                    <button id="show-email-btn" class="captcha-btn" data-translate-key="show-email">Afficher
+                        l'email</button>
                     <span id="email-display" class="hidden-contact"></span>
                 </p>
-                <p><i class="fa-solid fa-phone"></i> <span data-translate-key="phone">Téléphone</span>: 
-                    <button id="show-phone-btn" class="captcha-btn" data-translate-key="show-phone">Afficher le téléphone</button>
+                <p><i class="fa-solid fa-phone"></i> <span data-translate-key="phone">Téléphone</span>:
+                    <button id="show-phone-btn" class="captcha-btn" data-translate-key="show-phone">Afficher le
+                        téléphone</button>
                     <span id="phone-display" class="hidden-contact"></span>
                 </p>
             </div>
         </section>
     </div>
 </body>
+
 </html>

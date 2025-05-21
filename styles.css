@@ -6,7 +6,8 @@ html {
     --text-color: #000000;
     --background-color: #FFFFFF;
     --nav-link-color: #000000;
-    --nav-active-color: #FF69B4; /* Pink color */
+    --nav-active-color: #FF69B4;
+    /* Pink color */
     --accent-color: #5A2C73;
     --accent-color-hover: #4A1C63;
     --bg-color: #FFFFFF;
@@ -17,7 +18,8 @@ html {
     --text-color: #FFFFFF;
     --background-color: #3B1949;
     --nav-link-color: #FFFFFF;
-    --nav-active-color: #FF9FCE; /* Lighter pink for dark mode */
+    --nav-active-color: #FF9FCE;
+    /* Lighter pink for dark mode */
     --accent-color: #FF9FCE;
     --accent-color-hover: #FFC0DD;
     --bg-color: #3B1949;
@@ -33,7 +35,8 @@ body {
     font-family: Arial, sans-serif;
     color: var(--text-color);
     background-color: var(--background-color);
-    transition: background-color 0.5s ease, color 0.5s ease; /* Smoother transition */
+    transition: background-color 0.5s ease, color 0.5s ease;
+    /* Smoother transition */
 }
 
 /* Theme toggle button */
@@ -72,6 +75,7 @@ body {
     0% {
         transform: rotate(0deg);
     }
+
     100% {
         transform: rotate(360deg);
     }
@@ -150,7 +154,7 @@ nav {
     text-align: right;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--nav-link-color);
     transition: color 0.5s ease;
@@ -196,7 +200,13 @@ nav li {
     position: relative;
 }
 
-.skill-box:hover, .project-box:hover, .theme-toggle:hover, .lang-toggle:hover, .other-box:hover, .contact-container:hover, .study-box:hover {
+.skill-box:hover,
+.project-box:hover,
+.theme-toggle:hover,
+.lang-toggle:hover,
+.other-box:hover,
+.contact-container:hover,
+.study-box:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     border-color: #5A2C73;
@@ -312,11 +322,25 @@ nav li {
 }
 
 /* Staggered animation for filled dots */
-.skill-box:hover .skill-dot.filled:nth-child(1) { transition-delay: 0s; }
-.skill-box:hover .skill-dot.filled:nth-child(2) { transition-delay: 0.05s; }
-.skill-box:hover .skill-dot.filled:nth-child(3) { transition-delay: 0.1s; }
-.skill-box:hover .skill-dot.filled:nth-child(4) { transition-delay: 0.15s; }
-.skill-box:hover .skill-dot.filled:nth-child(5) { transition-delay: 0.2s; }
+.skill-box:hover .skill-dot.filled:nth-child(1) {
+    transition-delay: 0s;
+}
+
+.skill-box:hover .skill-dot.filled:nth-child(2) {
+    transition-delay: 0.05s;
+}
+
+.skill-box:hover .skill-dot.filled:nth-child(3) {
+    transition-delay: 0.1s;
+}
+
+.skill-box:hover .skill-dot.filled:nth-child(4) {
+    transition-delay: 0.15s;
+}
+
+.skill-box:hover .skill-dot.filled:nth-child(5) {
+    transition-delay: 0.2s;
+}
 
 /* Background SVGs */
 .background-svg {
@@ -372,7 +396,7 @@ nav {
     text-align: right;
 }
 
-a{
+a {
     text-decoration: none;
     color: var(--nav-link-color);
     transition: color 0.5s ease;
@@ -471,22 +495,25 @@ nav li {
 }
 
 @keyframes projectHighlightAnimation {
-    0% { 
+    0% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-    25% { 
+
+    25% {
         background-color: rgba(90, 44, 115, 0.15);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
-    75% { 
+
+    75% {
         background-color: rgba(90, 44, 115, 0.15);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
-    100% { 
+
+    100% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -499,22 +526,25 @@ nav li {
 }
 
 @keyframes projectHighlightAnimationDark {
-    0% { 
+    0% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-    25% { 
+
+    25% {
         background-color: rgba(255, 159, 206, 0.2);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
-    75% { 
+
+    75% {
         background-color: rgba(255, 159, 206, 0.2);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
-    100% { 
+
+    100% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -643,23 +673,28 @@ nav li {
 
 .project-view-link {
     display: inline-block;
-    color: #5A2C73; /* Match the heading color in light mode */
+    color: #5A2C73;
+    /* Match the heading color in light mode */
     font-weight: 500;
     transition: color 0.3s ease, transform 0.3s ease;
 }
 
 .project-box:hover .project-view-link {
-    transform: translateX(8px); /* Move right by 8px on hover */
-    color: #5A2C73; /* Keep the same color on hover in light mode */
+    transform: translateX(8px);
+    /* Move right by 8px on hover */
+    color: #5A2C73;
+    /* Keep the same color on hover in light mode */
 }
 
 /* Dark theme adjustments for project view link */
 [data-theme="dark"] .project-view-link {
-    color: #FF9FCE; /* Pink color in dark mode */
+    color: #FF9FCE;
+    /* Pink color in dark mode */
 }
 
 [data-theme="dark"] .project-box:hover .project-view-link {
-    color: #FF9FCE; /* Keep the same pink color on hover in dark mode */
+    color: #FF9FCE;
+    /* Keep the same pink color on hover in dark mode */
 }
 
 .project-box:hover {
@@ -711,7 +746,8 @@ nav li {
 }
 
 [data-theme="dark"] .project-view-link {
-    color: #FF9FCE; /* Match the heading color in dark mode */
+    color: #FF9FCE;
+    /* Match the heading color in dark mode */
 }
 
 /* Remove focus outline on project elements */
@@ -729,22 +765,25 @@ nav li {
 }
 
 @keyframes projectHighlightAnimation {
-    0% { 
+    0% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-    25% { 
+
+    25% {
         background-color: rgba(90, 44, 115, 0.15);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
-    75% { 
+
+    75% {
         background-color: rgba(90, 44, 115, 0.15);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
     }
-    100% { 
+
+    100% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -757,22 +796,25 @@ nav li {
 }
 
 @keyframes projectHighlightAnimationDark {
-    0% { 
+    0% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     }
-    25% { 
+
+    25% {
         background-color: rgba(255, 159, 206, 0.2);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
-    75% { 
+
+    75% {
         background-color: rgba(255, 159, 206, 0.2);
         transform: translateY(-5px);
         box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     }
-    100% { 
+
+    100% {
         background-color: transparent;
         transform: translateY(0);
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
@@ -1086,7 +1128,8 @@ nav li {
 .lang-toggle {
     position: fixed;
     top: 15px;
-    right: 65px; /* Position to the left of the theme toggle */
+    right: 65px;
+    /* Position to the left of the theme toggle */
     z-index: 100;
     background-color: rgba(255, 255, 255, 0.7);
     color: #5A2C73;
@@ -1149,13 +1192,15 @@ nav li {
 
 .header-container h1 {
     margin: 0;
-    display: inline-block; /* Allow the absolute positioning to be relative to the text width */
+    display: inline-block;
+    /* Allow the absolute positioning to be relative to the text width */
     position: relative;
 }
 
 .profile-image-link {
     position: absolute;
-    right: 150px; /* Position it to the right of the title */
+    right: 150px;
+    /* Position it to the right of the title */
     top: 50%;
     transform: translateY(-50%);
     display: block;
@@ -1215,12 +1260,14 @@ nav li {
 /* Hover effect matching profile image */
 .welcome-icon:hover i {
     transform: scale(1.1);
-    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6)); /* Changed to red glow */
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+    /* Changed to red glow */
 }
 
 /* Dark theme adjustments */
 [data-theme="dark"] .welcome-icon:hover i {
-    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6)); /* Changed to red glow in dark mode */
+    filter: drop-shadow(0 0 10px rgba(255, 0, 0, 0.6));
+    /* Changed to red glow in dark mode */
 }
 
 .protected-contact {
@@ -1261,7 +1308,7 @@ nav li {
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
     z-index: 1000;
     justify-content: center;
     align-items: center;
@@ -1272,7 +1319,7 @@ nav li {
     color: var(--text-color);
     padding: 25px;
     border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.25);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
     max-width: 400px;
     width: 90%;
     text-align: center;
@@ -1317,7 +1364,8 @@ nav li {
     margin-top: 20px;
 }
 
-.captcha-submit, .captcha-cancel {
+.captcha-submit,
+.captcha-cancel {
     padding: 10px 20px;
     border: none;
     border-radius: 8px;
@@ -1362,16 +1410,20 @@ nav li {
 .hidden-contact {
     display: none;
 }
+
 .hidden-contact:not(:empty) {
     display: inline;
 }
 
 /* Updated Scroll Arrow Styling */
 .scroll-arrow-container {
-    position: fixed; /* Changed from absolute to fixed */
+    position: fixed;
+    /* Changed from absolute to fixed */
     bottom: 50%;
-    right: 30px; /* Changed from left: 50% to right: 30px */
-    transform: translateY(50%); /* Changed from translateX(-50%) */
+    right: 30px;
+    /* Changed from left: 50% to right: 30px */
+    transform: translateY(50%);
+    /* Changed from translateX(-50%) */
     text-align: center;
     z-index: 10;
 }
@@ -1412,12 +1464,19 @@ nav li {
 }
 
 @keyframes bounce {
-    0%, 20%, 50%, 80%, 100% {
+
+    0%,
+    20%,
+    50%,
+    80%,
+    100% {
         transform: translateY(0);
     }
+
     40% {
         transform: translateY(-8px);
     }
+
     60% {
         transform: translateY(-4px);
     }
