@@ -66,21 +66,45 @@
     </div>
 
     <nav>
-        <div><a href="#projets" data-translate-key="projets">Projets</a></div>
-        <div><a href="#programmation" data-translate-key="programmation">Langages/Compétence</a></div>
-        <div><a href="#etudes" data-translate-key="etudes">Études</a></div>
-        <div><a href="#autres" data-translate-key="autres">Autres</a></div>
-        <div><a href="#contact" data-translate-key="contact">Contact</a></div>
+        <!-- Mobile nav toggle button -->
+        <button class="nav-toggle" id="navToggle" aria-label="Toggle navigation menu">
+            <i class="fas fa-bars"></i>
+        </button>
+        
+        <!-- Navigation content (collapsible on mobile) -->
+        <div class="nav-content" id="navContent">
+            <div class="nav-links">
+                <div><a href="#projets" data-translate-key="projets">Projets</a></div>
+                <div><a href="#etudes" data-translate-key="etudes">Études</a></div>
+                <div><a href="#autres" data-translate-key="autres">Autres</a></div>
+                <div><a href="#contact" data-translate-key="contact">Contact</a></div>
+            </div>
+            
+            <!-- Mobile controls (only visible on mobile) -->
+            <div class="mobile-controls">
+                <button class="mobile-lang-toggle" id="mobileLangToggle" aria-label="Toggle French/English language">
+                    <i class="fas fa-language"></i>
+                    <span class="lang-indicator">FR</span>
+                </button>
+                <button class="mobile-theme-toggle" id="mobileThemeToggle" aria-label="Toggle dark/light mode">
+                    <i class="fas fa-moon"></i>
+                </button>
+            </div>
+        </div>
     </nav>
 
     <div class="container">
         <div class="header-container">
             <h1 data-translate-key="portfolio-title">Portfolio Henri Saumure</h1>
-            <a href="https://github.com/HenriSaumure" target="_blank" class="profile-image-link"
-                data-translate-key-title="visit-github" title="Visiter mon profil GitHub">
-                <img src="https://avatars.githubusercontent.com/u/169080985?v=4" alt="Photo de profil"
-                    class="profile-image" data-translate-key-alt="profile-photo">
-            </a>
+            <div class="profile-section">
+                <a href="https://github.com/HenriSaumure" target="_blank" class="profile-image-link"
+                    data-translate-key-title="visit-github" title="Visiter mon profil GitHub">
+                    <img src="https://avatars.githubusercontent.com/u/169080985?v=4" alt="Photo de profil"
+                        class="profile-image" data-translate-key-alt="profile-photo">
+                </a>
+                <img class="curved-arrow" src="images/hand-drawn-curved-arrow-shape-arrow-line.png" alt="">
+                <a href="https://github.com/HenriSaumure" target="_blank" class="arrow-text" data-translate-key="visit-github">Visiter mon profil GitHub</a>
+            </div>
         </div>
 
         <div class="welcome-container">
@@ -99,6 +123,50 @@
         <section id="projets">
             <h2 data-translate-key="project-section-title">Projets</h2>
             <div class="project-box-container">
+
+                                <!-- Judo Boucherville Project -->
+                <a id="judo-project" href="https://new.judoboucherville.com" target="_blank"
+                    class="project-box-link">
+                    <div class="project-box">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3 data-translate-key="judo-title">Judo Boucherville</h3>
+                            </div>
+                            <div class="project-scale">
+                                <span class="scale-label" data-translate-key="scale">Échelle:</span>
+                                <div class="scale-meter">
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot"></span>
+                                </div>
+                                <span class="scale-value" data-translate-key="large">Large</span>
+                            </div>
+                            <p class="project-description" data-translate-key="judo-desc">Site web complet pour un club de judo avec gestion des athlètes, événements, compétitions, inscriptions, boutique et diffusion en direct</p>
+                            <div class="project-view-link" data-translate-key="visit-site">
+                                Visiter le site <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-label" data-translate-key="technologies">Technologies:</span>
+                            <div class="tech-items">
+                                <span class="tech-item">HTML</span>
+                                <span class="tech-item">CSS</span>
+                                <span class="tech-item">TypeScript</span>
+                                <span class="tech-item">C#</span>
+                                <span class="tech-item">ASP.NET</span>
+                                <span class="tech-item">Angular</span>
+                                <span class="tech-item">MSSQL</span>
+                                <span class="tech-item">Ubuntu Server</span>
+                                <span class="tech-item">CloudFlared</span>
+                                <span class="tech-item">Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+
+                <!-- Choculaterie Project -->
                 <a id="choculaterie-project" href="https://choculaterie.com" target="_blank" class="project-box-link">
                     <div class="project-box">
                         <div class="project-content">
@@ -130,13 +198,52 @@
                                 <span class="tech-item">JavaScript</span>
                                 <span class="tech-item">C#</span>
                                 <span class="tech-item">ASP.NET</span>
-                                <span class="tech-item">Angular</span>
                                 <span class="tech-item">MSSQL</span>
                                 <span class="tech-item">Azure Hosting</span>
                                 <span class="tech-item">Ubuntu Server</span>
                                 <span class="tech-item">Nginx</span>
                                 <span class="tech-item">CloudFlared</span>
                                 <span class="tech-item">SendGrid</span>
+                                <span class="tech-item">Brevo</span>
+                                <span class="tech-item">Git</span>
+                            </div>
+                        </div>
+                    </div>
+                </a>           
+
+                <!-- Litematic Downloader Mod Project -->
+                <a id="litematic-project" href="https://modrinth.com/mod/litematicdownloader" target="_blank"
+                    class="project-box-link">
+                    <div class="project-box">
+                        <div class="project-content">
+                            <div class="project-header">
+                                <h3 data-translate-key="litematic-title">Litematic Downloader Mod</h3>
+                                <div class="download-count">
+                                    <i class="fa-solid fa-download"></i>
+                                    <span id="litematic-downloads">-</span> <span data-translate-key="downloads">téléchargements</span>
+                                </div>
+                            </div>
+                            <div class="project-scale">
+                                <span class="scale-label" data-translate-key="scale">Échelle:</span>
+                                <div class="scale-meter">
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot filled"></span>
+                                    <span class="scale-dot"></span>
+                                    <span class="scale-dot"></span>
+                                </div>
+                                <span class="scale-value" data-translate-key="medium">Moyen</span>
+                            </div>
+                            <p class="project-description" data-translate-key="litematic-desc">Extension pour Litematica permettant de parcourir, prévisualiser et télécharger des schématiques directement depuis choculaterie.com sans quitter Minecraft. Gestionnaire de fichiers intégré avec fonctionnalité de partage rapide.</p>
+                            <div class="project-view-link" data-translate-key="view-modrinth">
+                                Voir sur Modrinth <i class="fa-solid fa-arrow-right"></i>
+                            </div>
+                        </div>
+                        <div class="project-tech">
+                            <span class="tech-label" data-translate-key="technologies">Technologies:</span>
+                            <div class="tech-items">
+                                <span class="tech-item">Java</span>
+                                <span class="tech-item">Choculaterie APIs</span>
                                 <span class="tech-item">Git</span>
                             </div>
                         </div>
@@ -178,364 +285,13 @@
                                 <span class="tech-item">Node.js</span>
                                 <span class="tech-item">Express</span>
                                 <span class="tech-item">WebSockets</span>
-                                <span class="tech-item">Cryptographie</span>
+                                <span class="tech-item">Cryptography</span>
                                 <span class="tech-item">Git</span>
                             </div>
                         </div>
                     </div>
                 </a>
-            </div>
-        </section>
 
-        <section id="programmation">
-            <h2 data-translate-key="programming-section-title">Programmation</h2>
-            <div class="skills-container">
-                <!-- HTML -->
-                <div id="htmlSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/html-icon.svg" alt="HTML Icon" width="20">
-                            <h3>HTML</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
-                                <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- CSS -->
-                <div id="cssSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/css-icon.svg" alt="CSS Icon" width="20">
-                            <h3>CSS</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
-                                <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- JavaScript -->
-                <div id="jsSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/javascript-programming-language-icon.svg" alt="JavaScript Icon" width="20">
-                            <h3>JavaScript</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
-                                <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- C# -->
-                <div id="csharpSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/c-sharp-programming-language-icon.svg" alt="C# Icon" width="20">
-                            <h3>C#</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- TypeScript -->
-                <div id="typescriptSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/typescript-programming-language-icon.svg" alt="TypeScript Icon" width="20">
-                            <h3>TypeScript</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Azure Hosting -->
-                <div id="azureSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/azure-icon.svg" alt="Azure Icon" width="20">
-                            <h3>Azure Hosting</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Git -->
-                <div id="gitSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/git-icon.svg" alt="Git Icon" width="20">
-                            <h3>Git</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p>
-                                <span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span>,
-                                <span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- SQL -->
-                <div id="sqlSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/sql-code-file-black-icon.svg" alt="SQL Icon" width="20">
-                            <h3>SQL, MSSQL, SQL-Transact</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Angular -->
-                <div id="angularSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/angular-icon.svg" alt="Angular Icon" width="20">
-                            <h3>Angular</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- ASP.NET Core -->
-                <div id="aspnetSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/microsoft-dot-net-icon.svg" alt="ASP.NET Core Icon" width="20">
-                            <h3>ASP.NET Core</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Kotlin -->
-                <div id="kotlinSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/kotlin-programming-language-icon.svg" alt="Kotlin Icon" width="20">
-                            <h3>Kotlin</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p data-translate-key="no-projects">Aucun Projet Hors Scholaire</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Linux -->
-                <div id="linuxSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/sql-server-icon.svg" alt="Linux Debian Icon" width="20">
-                            <h3>Linux Debian (Ubuntu Server)</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('choculaterie-project')"
-                                    data-translate-key="choculaterie-project-link">Choculaterie.com</span></p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Node.js -->
-                <div id="nodeSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/node-js-icon.svg" alt="Node.js Icon" width="20">
-                            <h3>Node.js</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Express.js -->
-                <div id="expressSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/express-js-icon.svg" alt="Express Icon" width="20">
-                            <h3>Express.js</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- EJS -->
-                <div id="ejsSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/javascript-programming-language-icon.svg" alt="EJS Icon" width="20">
-                            <h3>EJS</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- WebSockets -->
-                <div id="wsSkill" class="skill-box">
-                    <div class="skill-content">
-                        <div class="skill-header">
-                            <img src="images/websocket-svgrepo-com.svg" alt="WebSockets Icon" width="20">
-                            <h3>WebSockets</h3>
-                            <div class="skill-meter">
-                                <span class="skill-dot filled"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                                <span class="skill-dot"></span>
-                            </div>
-                        </div>
-                        <div class="skill-description">
-                            <p><span class="project-link" onclick="scrollToProject('chatapp-project')">Chat App</span>
-                            </p>
-                        </div>
-                    </div>
-                </div>
             </div>
         </section>
 

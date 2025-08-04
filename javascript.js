@@ -1,14 +1,115 @@
 document.addEventListener('DOMContentLoaded', (event) => {
     // Theme switching functionality
     const themeToggleBtn = document.getElementById('themeToggle');
-    const themeIcon = themeToggleBtn.querySelector('i');
+    const themeIcon = themeToggleBtn?.querySelector('i');
     let isThemeChanging = false; // Flag to prevent multiple animations
+
+    // Mobile theme toggle
+    const mobileThemeToggleBtn = document.getElementById('mobileThemeToggle');
+    const mobileThemeIcon = mobileThemeToggleBtn?.querySelector('i');
 
     // Language toggle functionality
     const langToggleBtn = document.getElementById('langToggle');
-    const langIndicator = langToggleBtn.querySelector('.lang-indicator');
-    const langIcon = langToggleBtn.querySelector('i');
+    const langIndicator = langToggleBtn?.querySelector('.lang-indicator');
+    const langIcon = langToggleBtn?.querySelector('i');
     let isLangChanging = false;
+
+    // Mobile language toggle
+    const mobileLangToggleBtn = document.getElementById('mobileLangToggle');
+    const mobileLangIndicator = mobileLangToggleBtn?.querySelector('.lang-indicator');
+    const mobileLangIcon = mobileLangToggleBtn?.querySelector('i');
+
+    // Mobile navigation toggle
+    const navToggle = document.getElementById('navToggle');
+    const navContent = document.getElementById('navContent');
+    const navToggleIcon = navToggle?.querySelector('i');
+
+    // Mobile navigation functionality
+    function toggleMobileNav() {
+        const isOpen = navContent.classList.contains('open');
+        const currentLang = localStorage.getItem('language') || 'fr';
+        
+        if (isOpen) {
+            navContent.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            navToggleIcon.className = 'fas fa-bars';
+        } else {
+            navContent.classList.add('open');
+            navToggle.classList.add('active');
+            document.body.classList.add('nav-open');
+            navToggleIcon.className = 'fas fa-times';
+        }
+        
+        // Update the text based on current language and state
+        updateNavToggleText();
+    }
+
+    // Function to update nav toggle text based on language and state
+    function updateNavToggleText() {
+        if (!navToggle) return;
+        
+        const isOpen = navContent.classList.contains('open');
+        const currentLang = localStorage.getItem('language') || 'fr';
+        
+        // Remove existing pseudo content by using CSS classes
+        navToggle.classList.remove('menu-closed', 'menu-open');
+        navToggle.classList.add(isOpen ? 'menu-open' : 'menu-closed');
+        navToggle.setAttribute('data-lang', currentLang);
+    }
+
+    // Close mobile nav when clicking on nav links
+    function closeMobileNavOnLinkClick() {
+        if (window.innerWidth <= 768) {
+            navContent.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            navToggleIcon.className = 'fas fa-bars';
+            // Update the nav toggle text
+            updateNavToggleText();
+        }
+    }
+
+    // Add event listener for mobile nav toggle
+    if (navToggle) {
+        navToggle.addEventListener('click', toggleMobileNav);
+    }
+
+    // Add event listeners to nav links to close mobile nav
+    const mobileNavLinks = document.querySelectorAll('nav a');
+    mobileNavLinks.forEach(link => {
+        link.addEventListener('click', closeMobileNavOnLinkClick);
+    });
+
+    // Close mobile nav when clicking outside
+    document.addEventListener('click', (e) => {
+        if (window.innerWidth <= 768 && 
+            navContent.classList.contains('open') && 
+            !navContent.contains(e.target) && 
+            !navToggle.contains(e.target)) {
+            navContent.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            navToggleIcon.className = 'fas fa-bars';
+            // Update the nav toggle text
+            updateNavToggleText();
+        }
+    });
+
+    // Handle window resize
+    window.addEventListener('resize', () => {
+        if (window.innerWidth > 768) {
+            // Reset mobile nav state when switching to desktop
+            navContent.classList.remove('open');
+            navToggle.classList.remove('active');
+            document.body.classList.remove('nav-open');
+            if (navToggleIcon) {
+                navToggleIcon.className = 'fas fa-bars';
+            }
+            // Update the nav toggle text
+            updateNavToggleText();
+        }
+    });
 
     function setLanguage(langCode) {
         console.log("Setting language to:", langCode); // Debugging log
@@ -19,11 +120,21 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Store in localStorage
         localStorage.setItem('language', langCode);
 
-        // Update indicator text on button
-        langIndicator.textContent = langCode.toUpperCase();
+        // Update indicator text on both buttons
+        if (langIndicator) {
+            langIndicator.textContent = langCode.toUpperCase();
+        }
+        if (mobileLangIndicator) {
+            mobileLangIndicator.textContent = langCode.toUpperCase();
+        }
 
         // Translate page content
         translatePageContent(langCode);
+        
+        // Update nav toggle text if on mobile
+        if (typeof updateNavToggleText === 'function') {
+            updateNavToggleText();
+        }
 
         console.log("Language set complete"); // Debugging log
     }
@@ -47,7 +158,12 @@ document.addEventListener('DOMContentLoaded', (event) => {
         isLangChanging = true;
 
         // Add the rotate class to trigger animation
-        langIcon.classList.add('rotate');
+        if (langIcon) {
+            langIcon.classList.add('rotate');
+        }
+        if (mobileLangIcon) {
+            mobileLangIcon.classList.add('rotate');
+        }
 
         // Set the new language with a slight delay to ensure animation plays
         setTimeout(() => {
@@ -57,19 +173,40 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Listen for animation end to clean up
         const handleAnimationEnd = function () {
             // Remove the rotate class after animation completes
-            langIcon.classList.remove('rotate');
+            if (langIcon) {
+                langIcon.classList.remove('rotate');
+            }
+            if (mobileLangIcon) {
+                mobileLangIcon.classList.remove('rotate');
+            }
 
             // Reset the flag
             isLangChanging = false;
 
-            // Clean up the event listener
-            langIcon.removeEventListener('animationend', handleAnimationEnd);
+            // Clean up the event listeners
+            if (langIcon) {
+                langIcon.removeEventListener('animationend', handleAnimationEnd);
+            }
+            if (mobileLangIcon) {
+                mobileLangIcon.removeEventListener('animationend', handleAnimationEnd);
+            }
         };
 
-        langIcon.addEventListener('animationend', handleAnimationEnd);
+        if (langIcon) {
+            langIcon.addEventListener('animationend', handleAnimationEnd);
+        }
+        if (mobileLangIcon) {
+            mobileLangIcon.addEventListener('animationend', handleAnimationEnd);
+        }
     }
 
-    langToggleBtn.addEventListener('click', toggleLanguage);
+    // Connect both language toggle buttons
+    if (langToggleBtn) {
+        langToggleBtn.addEventListener('click', toggleLanguage);
+    }
+    if (mobileLangToggleBtn) {
+        mobileLangToggleBtn.addEventListener('click', toggleLanguage);
+    }
 
     // Initialize language with better logging
     const savedLanguage = localStorage.getItem('language');
@@ -91,6 +228,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
         setLanguage('en');
     }
 
+    // Initialize nav toggle text
+    if (typeof updateNavToggleText === 'function') {
+        updateNavToggleText();
+    }
+
 
     function setTheme(themeName) {
         document.documentElement.setAttribute('data-theme', themeName);
@@ -107,31 +249,58 @@ document.addEventListener('DOMContentLoaded', (event) => {
         // Set flag to prevent additional animations
         isThemeChanging = true;
 
-        // Change the icon immediately
-        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        // Change the icon immediately on both buttons
+        if (themeIcon) {
+            themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
+        if (mobileThemeIcon) {
+            mobileThemeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        }
 
         // Then add the rotate class to trigger animation
         requestAnimationFrame(() => {
-            themeIcon.classList.add('rotate');
+            if (themeIcon) {
+                themeIcon.classList.add('rotate');
+            }
+            if (mobileThemeIcon) {
+                mobileThemeIcon.classList.add('rotate');
+            }
         });
 
         // Set the new theme
         setTheme(newTheme);
 
         // Listen for animation end to clean up
-        themeIcon.addEventListener('animationend', function onAnimationEnd() {
+        const handleAnimationEnd = function() {
             // Remove the rotate class after animation completes
-            themeIcon.classList.remove('rotate');
-
-            // Clean up the event listener
-            themeIcon.removeEventListener('animationend', onAnimationEnd);
+            if (themeIcon) {
+                themeIcon.classList.remove('rotate');
+                themeIcon.removeEventListener('animationend', handleAnimationEnd);
+            }
+            if (mobileThemeIcon) {
+                mobileThemeIcon.classList.remove('rotate');
+                mobileThemeIcon.removeEventListener('animationend', handleAnimationEnd);
+            }
 
             // Reset the flag
             isThemeChanging = false;
-        }, { once: true });
+        };
+
+        if (themeIcon) {
+            themeIcon.addEventListener('animationend', handleAnimationEnd, { once: true });
+        }
+        if (mobileThemeIcon) {
+            mobileThemeIcon.addEventListener('animationend', handleAnimationEnd, { once: true });
+        }
     }
 
-    themeToggleBtn.addEventListener('click', toggleTheme);
+    // Connect both theme toggle buttons
+    if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', toggleTheme);
+    }
+    if (mobileThemeToggleBtn) {
+        mobileThemeToggleBtn.addEventListener('click', toggleTheme);
+    }
 
     // Initialize theme
     const savedTheme = localStorage.getItem('theme');
@@ -140,19 +309,41 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Set initial icon without animation
     if (savedTheme) {
         setTheme(savedTheme);
-        themeIcon.className = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        const iconClass = savedTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        if (themeIcon) {
+            themeIcon.className = iconClass;
+        }
+        if (mobileThemeIcon) {
+            mobileThemeIcon.className = iconClass;
+        }
     } else if (prefersDarkScheme.matches) {
         setTheme('dark');
-        themeIcon.className = 'fas fa-sun';
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-sun';
+        }
+        if (mobileThemeIcon) {
+            mobileThemeIcon.className = 'fas fa-sun';
+        }
     } else {
         setTheme('light');
-        themeIcon.className = 'fas fa-moon';
+        if (themeIcon) {
+            themeIcon.className = 'fas fa-moon';
+        }
+        if (mobileThemeIcon) {
+            mobileThemeIcon.className = 'fas fa-moon';
+        }
     }
 
     prefersDarkScheme.addEventListener('change', (e) => {
         const newTheme = e.matches ? 'dark' : 'light';
         setTheme(newTheme);
-        themeIcon.className = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        const iconClass = newTheme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        if (themeIcon) {
+            themeIcon.className = iconClass;
+        }
+        if (mobileThemeIcon) {
+            mobileThemeIcon.className = iconClass;
+        }
     });
 
     // Navigation functionality
@@ -277,9 +468,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         }
 
-        // Default to Programmation if no stored selection
-        const programmationLink = document.querySelector('nav a[href="#programmation"]');
-        if (programmationLink) programmationLink.classList.add('active');
+        // Default to Projects if no stored selection
+        const projectsLink = document.querySelector('nav a[href="#projets"]');
+        if (projectsLink) projectsLink.classList.add('active');
     }
 
     setInitialActiveNavLink();
@@ -305,6 +496,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
 
     // Initialize contact protection after DOM is loaded
     initContactProtection();
+
+    // Fetch Litematic Downloader mod download count
+    fetchLitematicDownloads();
 
     // Scroll down arrow functionality
     const scrollArrow = document.getElementById('scrollArrow');
@@ -395,38 +589,6 @@ document.addEventListener('DOMContentLoaded', (event) => {
     }
 });
 
-// Project navigation function (fixed)
-function scrollToProject(projectId) {
-    const projectElement = document.getElementById(projectId);
-    if (projectElement) {
-        // Scroll to the element
-        projectElement.scrollIntoView({
-            behavior: 'smooth',
-            block: 'center'
-        });
-
-        // Find the project-box element
-        const projectBox = projectElement.querySelector('.project-box');
-        if (projectBox) {
-            // First, remove any existing highlight classes to ensure clean start
-            projectBox.classList.remove('highlight');
-
-            // Force browser to recognize the removal before adding it again
-            setTimeout(() => {
-                // Add highlight class to trigger animation
-                projectBox.classList.add('highlight');
-
-                // Remove the highlight class after animation completes
-                setTimeout(() => {
-                    projectBox.classList.remove('highlight');
-                }, 1500);
-            }, 10);
-        }
-    } else {
-        console.error(`Element with ID '${projectId}' not found`);
-    }
-}
-
 function getRandomChar() {
     const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=[]{}|;:,.<>?";
     return chars.charAt(Math.floor(Math.random() * chars.length));
@@ -499,10 +661,11 @@ function translatePageContent(langCode) {
 
             // Navigation
             'projets': 'Projets',
-            'programmation': 'Langages/Compétence',
             'etudes': 'Études',
             'autres': 'Autres',
             'contact': 'Contact',
+            'nav-menu': 'Menu',
+            'nav-close': 'Fermer',
 
             // Header
             'welcome': 'Bienvenue ! Vous trouverez ici tout ce que j\'ai réalisé',
@@ -520,11 +683,14 @@ function translatePageContent(langCode) {
             'chatapp-title': 'Chat App',
             'chatapp-desc': 'Application de messagerie sécurisée qui utilise le stockage RAM pour ne pas laisser de traces des messages',
             'view-github': 'Voir sur GitHub',
+            'litematic-title': 'Litematic Downloader Mod',
+            'litematic-desc': 'Extension pour Litematica permettant de parcourir, prévisualiser et télécharger des schématiques directement depuis choculaterie.com sans quitter Minecraft. Gestionnaire de fichiers intégré avec fonctionnalité de partage rapide.',
+            'view-modrinth': 'Voir sur Modrinth',
+            'judo-title': 'Judo Boucherville',
+            'judo-desc': 'Site web complet pour un club de judo avec gestion des athlètes, événements, compétitions, inscriptions, boutique et diffusion en direct',
+            'downloads': 'téléchargements',
+            'medium': 'Moyen',
             'technologies': 'Technologies:',
-
-            // Programming section
-            'programming-section-title': 'Langages/Compétence',
-            'no-projects': 'Aucun Projet Hors Scholaire',
 
             // Education section
             'education-section-title': 'Études',
@@ -555,12 +721,7 @@ function translatePageContent(langCode) {
             'email': 'Email',
             'phone': 'Téléphone',
             'show-email': 'Afficher l\'email',
-            'show-phone': 'Afficher le téléphone',
-            'captcha-title': 'Vérification',
-            'captcha-instruction': 'Pour voir les informations de contact, veuillez résoudre ce simple calcul:',
-            'captcha-submit': 'Vérifier',
-            'captcha-cancel': 'Annuler',
-            'captcha-error': 'Réponse incorrecte, veuillez réessayer'
+            'show-phone': 'Afficher le téléphone'
         },
         'en': {
             // Add page title
@@ -568,10 +729,11 @@ function translatePageContent(langCode) {
 
             // Navigation
             'projets': 'Projects',
-            'programmation': 'Languages/Skills',
             'etudes': 'Education',
             'autres': 'Others',
             'contact': 'Contact',
+            'nav-menu': 'Menu',
+            'nav-close': 'Close',
 
             // Header
             'welcome': 'Welcome! Here you\'ll find everything I\'ve accomplished',
@@ -589,11 +751,14 @@ function translatePageContent(langCode) {
             'chatapp-title': 'Chat App',
             'chatapp-desc': 'Secure messaging application that uses RAM storage to leave no trace of messages',
             'view-github': 'View on GitHub',
+            'litematic-title': 'Litematic Downloader Mod',
+            'litematic-desc': 'Extension for Litematica that allows browsing, previewing, and downloading schematics directly from choculaterie.com without leaving Minecraft. Includes integrated file manager with quick-share functionality.',
+            'view-modrinth': 'View on Modrinth',
+            'judo-title': 'Judo Boucherville',
+            'judo-desc': 'Complete website for a judo club with athlete management, events, competitions, registrations, shop and live streaming',
+            'downloads': 'downloads',
+            'medium': 'Medium',
             'technologies': 'Technologies:',
-
-            // Programming section
-            'programming-section-title': 'Languages/Skills',
-            'no-projects': 'No Non-Academic Projects',
 
             // Education section
             'education-section-title': 'Studies',
@@ -624,12 +789,7 @@ function translatePageContent(langCode) {
             'email': 'Email',
             'phone': 'Phone',
             'show-email': 'Show email',
-            'show-phone': 'Show phone',
-            'captcha-title': 'Verification',
-            'captcha-instruction': 'To view contact information, please solve this simple math problem:',
-            'captcha-submit': 'Verify',
-            'captcha-cancel': 'Cancel',
-            'captcha-error': 'Incorrect answer, please try again'
+            'show-phone': 'Show phone'
         }
     };
 
@@ -685,78 +845,9 @@ function translatePageContent(langCode) {
     });
 }
 
-// Anti-scraping protection for contact information
+// Simplified contact information display
 function initContactProtection() {
-    console.log('Initializing contact protection');
-
-    // Get the current language using the SAME logic as your main app
-    const savedLanguage = localStorage.getItem('language');
-    const userLang = navigator.language || navigator.userLanguage;
-    const prefersFrench = userLang.startsWith('fr');
-
-    // Determine language in the same way as the main site
-    let currentLang;
-    if (savedLanguage) {
-        console.log('CAPTCHA using saved language preference:', savedLanguage);
-        currentLang = savedLanguage;
-    } else if (prefersFrench) {
-        console.log('CAPTCHA using browser preference: French');
-        currentLang = 'fr';
-    } else {
-        console.log('CAPTCHA defaulting to English');
-        currentLang = 'en';
-    }
-
-    // Get translation keys based on current language
-    const translations = {
-        'fr': {
-            'captcha-title': 'Vérification',
-            'captcha-instruction': 'Pour voir les informations de contact, veuillez résoudre ce simple calcul:',
-            'captcha-submit': 'Vérifier',
-            'captcha-cancel': 'Annuler',
-            'captcha-error': 'Réponse incorrecte, veuillez réessayer'
-        },
-        'en': {
-            'captcha-title': 'Verification',
-            'captcha-instruction': 'To view contact information, please solve this simple math problem:',
-            'captcha-submit': 'Verify',
-            'captcha-cancel': 'Cancel',
-            'captcha-error': 'Incorrect answer, please try again'
-        }
-    };
-
-    const t = translations[currentLang] || translations['en'];
-
-    // Create and inject the CAPTCHA modal into the DOM if it doesn't exist
-    if (!document.getElementById('captcha-modal')) {
-        const modalHTML = `
-            <div id="captcha-modal" class="captcha-modal">
-                <div class="captcha-container">
-                    <h3 data-translate-key="captcha-title">${t['captcha-title']}</h3>
-                    <p data-translate-key="captcha-instruction">${t['captcha-instruction']}</p>
-                    <div id="captcha-challenge" class="captcha-challenge"></div>
-                    <input type="number" id="captcha-answer" class="captcha-input" placeholder="?" min="0" max="100">
-                    <div class="captcha-buttons">
-                        <button id="captcha-submit" class="captcha-submit" data-translate-key="captcha-submit">${t['captcha-submit']}</button>
-                        <button id="captcha-cancel" class="captcha-cancel" data-translate-key="captcha-cancel">${t['captcha-cancel']}</button>
-                    </div>
-                    <p id="captcha-error" style="color: var(--accent-color); display: none;" data-translate-key="captcha-error">${t['captcha-error']}</p>
-                </div>
-            </div>
-        `;
-        document.body.insertAdjacentHTML('beforeend', modalHTML);
-        console.log('CAPTCHA modal created with language:', currentLang); // Debug log
-    } else {
-        console.log('CAPTCHA modal already exists'); // Debug log
-    }
-
-    // Get all the elements
-    const captchaModal = document.getElementById('captcha-modal');
-    const captchaChallenge = document.getElementById('captcha-challenge');
-    const captchaAnswer = document.getElementById('captcha-answer');
-    const captchaSubmit = document.getElementById('captcha-submit');
-    const captchaCancel = document.getElementById('captcha-cancel');
-    const captchaError = document.getElementById('captcha-error');
+    console.log('Initializing direct contact display');
 
     // Email details
     const emailBtn = document.getElementById('show-email-btn');
@@ -768,118 +859,80 @@ function initContactProtection() {
 
     // Log element availability for debugging
     console.log('Elements found:', {
-        captchaModal: !!captchaModal,
         emailBtn: !!emailBtn,
         emailDisplay: !!emailDisplay,
         phoneBtn: !!phoneBtn,
         phoneDisplay: !!phoneDisplay
     });
 
-    // Variables for CAPTCHA
-    let currentCaptchaAnswer = 0;
-    let contactType = '';
-
-    // Generate a random math problem
-    function generateCaptcha() {
-        const num1 = Math.floor(Math.random() * 10) + 1;
-        const num2 = Math.floor(Math.random() * 10) + 1;
-        currentCaptchaAnswer = num1 + num2;
-        captchaChallenge.textContent = `${num1} + ${num2} = ?`;
-        captchaAnswer.value = '';
-        captchaError.style.display = 'none';
-    }
-
-    // Show CAPTCHA modal
-    function showCaptcha(type) {
-        contactType = type;
-        generateCaptcha();
-        captchaModal.style.display = 'flex';
-        captchaAnswer.focus();
-    }
-
-    // Hide CAPTCHA modal
-    function hideCaptcha() {
-        captchaModal.style.display = 'none';
-    }
-
-    // Verify CAPTCHA answer and show contact info if correct
-    function verifyCaptcha() {
-        const userAnswer = parseInt(captchaAnswer.value, 10);
-
-        if (userAnswer === currentCaptchaAnswer) {
-            hideCaptcha();
-
-            if (contactType === 'email') {
-                // Email components
-                const emailParts = ['henri', 'saumure.com'];
-                const emailBtn = document.getElementById('show-email-btn');
-                const emailDisplay = document.getElementById('email-display');
-
-                // Show email
-                if (emailBtn && emailDisplay) {
-                    emailBtn.style.display = 'none';
-                    emailDisplay.style.display = 'inline';
-                    emailDisplay.innerHTML = `<a href="mailto:${emailParts[0]}@${emailParts[1]}" class="contact-info">${emailParts[0]}@${emailParts[1]}</a>`;
-                    console.log('Email displayed successfully');
-                }
-            } else if (contactType === 'phone') {
-                // Phone components
-                const phoneParts = ['514', '234', '9707'];
-                const phoneBtn = document.getElementById('show-phone-btn');
-                const phoneDisplay = document.getElementById('phone-display');
-
-                // Show phone
-                if (phoneBtn && phoneDisplay) {
-                    phoneBtn.style.display = 'none';
-                    phoneDisplay.style.display = 'inline';
-                    const formattedPhone = `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
-                    phoneDisplay.innerHTML = `<a href="tel:+1${phoneParts[0]}${phoneParts[1]}${phoneParts[2]}" class="contact-info">${formattedPhone}</a>`;
-                    console.log('Phone displayed successfully');
-                }
-            }
-        } else {
-            captchaError.style.display = 'block';
-            generateCaptcha();
+    // Function to show email directly
+    function showEmail() {
+        // Email components
+        const emailParts = ['henri', 'saumure.com'];
+        
+        // Show email
+        if (emailBtn && emailDisplay) {
+            emailBtn.style.display = 'none';
+            emailDisplay.style.display = 'inline';
+            emailDisplay.innerHTML = `<a href="mailto:${emailParts[0]}@${emailParts[1]}" class="contact-info">${emailParts[0]}@${emailParts[1]}</a>`;
+            console.log('Email displayed successfully');
         }
     }
 
-    // Only add event listeners if elements exist
+    // Function to show phone directly
+    function showPhone() {
+        // Phone components
+        const phoneParts = ['514', '234', '9707'];
+        
+        // Show phone
+        if (phoneBtn && phoneDisplay) {
+            phoneBtn.style.display = 'none';
+            phoneDisplay.style.display = 'inline';
+            const formattedPhone = `(${phoneParts[0]}) ${phoneParts[1]}-${phoneParts[2]}`;
+            phoneDisplay.innerHTML = `<a href="tel:+1${phoneParts[0]}${phoneParts[1]}${phoneParts[2]}" class="contact-info">${formattedPhone}</a>`;
+            console.log('Phone displayed successfully');
+        }
+    }
+
+    // Add event listeners to show contact info directly
     if (emailBtn) {
         emailBtn.addEventListener('click', () => {
             console.log('Email button clicked'); // Debug log
-            showCaptcha('email');
+            showEmail();
         });
     }
 
     if (phoneBtn) {
         phoneBtn.addEventListener('click', () => {
             console.log('Phone button clicked'); // Debug log
-            showCaptcha('phone');
+            showPhone();
         });
     }
 
-    if (captchaSubmit) {
-        captchaSubmit.addEventListener('click', verifyCaptcha);
-    }
+    console.log('Direct contact display initialized'); // Debug log
+}
 
-    if (captchaCancel) {
-        captchaCancel.addEventListener('click', hideCaptcha);
+// Function to fetch and display Litematic Downloader mod download count
+async function fetchLitematicDownloads() {
+    try {
+        const response = await fetch('https://api.modrinth.com/v2/project/litematicdownloader');
+        const data = await response.json();
+        const downloads = data.downloads;
+        
+        // Format the number with commas for better readability
+        const formattedDownloads = downloads.toLocaleString();
+        
+        // Update the download count in the DOM
+        const downloadElement = document.getElementById('litematic-downloads');
+        if (downloadElement) {
+            downloadElement.textContent = formattedDownloads;
+        }
+    } catch (error) {
+        console.error('Error fetching Litematic Downloader download count:', error);
+        // Fallback to show a dash if API call fails
+        const downloadElement = document.getElementById('litematic-downloads');
+        if (downloadElement) {
+            downloadElement.textContent = '-';
+        }
     }
-
-    if (captchaAnswer) {
-        // Allow Enter key to submit
-        captchaAnswer.addEventListener('keyup', (e) => {
-            if (e.key === 'Enter') verifyCaptcha();
-            if (e.key === 'Escape') hideCaptcha();
-        });
-    }
-
-    if (captchaModal) {
-        // Close modal if clicking outside
-        captchaModal.addEventListener('click', (e) => {
-            if (e.target === captchaModal) hideCaptcha();
-        });
-    }
-
-    console.log('Contact protection initialized'); // Debug log
 }
