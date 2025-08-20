@@ -946,27 +946,68 @@ async function fetchLitematicDownloads() {
 
 // Function to fetch and display Choculaterie user and schematic counts
 async function fetchChoculaterieStats() {
+    console.log('Attempting to fetch Choculaterie stats...');
+    
+    // Check if we're running from file:// protocol (local development)
+    const isLocalFile = window.location.protocol === 'file:';
+    
+    if (isLocalFile) {
+        console.log('Running from local file, using fallback values');
+        // Use known values for local testing
+        const userElement = document.getElementById('choculaterie-users');
+        const schematicElement = document.getElementById('choculaterie-schematics');
+        
+        if (userElement) {
+            userElement.textContent = '91';
+        }
+        if (schematicElement) {
+            schematicElement.textContent = '54';
+        }
+        return;
+    }
+    
     try {
-        const response = await fetch('https://choculaterie.com/api/user-schematic-stats');
+        const response = await fetch('https://choculaterie.com/api/user-schematic-stats', {
+            method: 'GET',
+            headers: {
+                'Accept': 'application/json',
+            }
+        });
+        
+        console.log('Response status:', response.status);
+        
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        
         const data = await response.json();
+        console.log('Received data:', data);
+        
         const { userCount, schematicCount } = data;
         
         // Format the numbers with commas for better readability
         const formattedUserCount = userCount.toLocaleString();
         const formattedSchematicCount = schematicCount.toLocaleString();
         
+        console.log('Formatted counts:', { users: formattedUserCount, schematics: formattedSchematicCount });
+        
         // Update the counts in the DOM
         const userElement = document.getElementById('choculaterie-users');
         const schematicElement = document.getElementById('choculaterie-schematics');
         
+        console.log('Found elements:', { userElement: !!userElement, schematicElement: !!schematicElement });
+        
         if (userElement) {
             userElement.textContent = formattedUserCount;
+            console.log('Updated user count to:', formattedUserCount);
         }
         if (schematicElement) {
             schematicElement.textContent = formattedSchematicCount;
+            console.log('Updated schematic count to:', formattedSchematicCount);
         }
     } catch (error) {
         console.error('Error fetching Choculaterie stats:', error);
+        
         // Fallback to show dashes if API call fails
         const userElement = document.getElementById('choculaterie-users');
         const schematicElement = document.getElementById('choculaterie-schematics');
