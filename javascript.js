@@ -948,26 +948,6 @@ async function fetchLitematicDownloads() {
 async function fetchChoculaterieStats() {
     console.log('Attempting to fetch Choculaterie stats...');
     
-    // Check if we're running from file:// protocol (local development)
-    const isLocalFile = window.location.protocol === 'file:';
-    // Check if we're running from GitHub Pages (which will also have CORS issues)
-    const isGitHubPages = window.location.hostname.includes('github.io');
-    
-    if (isLocalFile || isGitHubPages) {
-        console.log('Running from local file or GitHub Pages, using fallback values');
-        // Use known values for local testing and GitHub Pages
-        const userElement = document.getElementById('choculaterie-users');
-        const schematicElement = document.getElementById('choculaterie-schematics');
-        
-        if (userElement) {
-            userElement.textContent = '91';
-        }
-        if (schematicElement) {
-            schematicElement.textContent = '54';
-        }
-        return;
-    }
-    
     try {
         const response = await fetch('https://choculaterie.com/api/user-schematic-stats', {
             method: 'GET',
@@ -1010,16 +990,15 @@ async function fetchChoculaterieStats() {
     } catch (error) {
         console.error('Error fetching Choculaterie stats:', error);
         
-        // Fallback to show the known values if API call fails (CORS or other issues)
-        console.log('Using fallback values due to error');
+        // Fallback to show dashes if API call fails
         const userElement = document.getElementById('choculaterie-users');
         const schematicElement = document.getElementById('choculaterie-schematics');
         
         if (userElement) {
-            userElement.textContent = '91';
+            userElement.textContent = '-';
         }
         if (schematicElement) {
-            schematicElement.textContent = '54';
+            schematicElement.textContent = '-';
         }
     }
 }
