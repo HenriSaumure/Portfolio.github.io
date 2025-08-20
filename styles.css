@@ -902,6 +902,28 @@ nav li {
     font-size: 11px;
 }
 
+/* Stats container styling */
+.stats-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    margin-top: 5px;
+}
+
+.stat-item {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    font-size: 12px;
+    color: #666;
+    opacity: 0.8;
+}
+
+.stat-item i {
+    font-size: 11px;
+}
+
 /* Dark theme adjustments for project header and scale */
 [data-theme="dark"] .project-header h3 {
     color: #FF9FCE;
@@ -912,6 +934,10 @@ nav li {
 }
 
 [data-theme="dark"] .download-count {
+    color: #ccc;
+}
+
+[data-theme="dark"] .stats-container .stat-item {
     color: #ccc;
 }
 

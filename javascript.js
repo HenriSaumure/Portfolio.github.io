@@ -500,6 +500,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Fetch Litematic Downloader mod download count
     fetchLitematicDownloads();
 
+    // Fetch Choculaterie user and schematic stats
+    fetchChoculaterieStats();
+
     // Scroll down arrow functionality
     const scrollArrow = document.getElementById('scrollArrow');
 
@@ -689,6 +692,8 @@ function translatePageContent(langCode) {
             'judo-title': 'Judo Boucherville',
             'judo-desc': 'Site web complet pour un club de judo avec gestion des athlètes, événements, compétitions, inscriptions, boutique et diffusion en direct',
             'downloads': 'téléchargements',
+            'users': 'utilisateurs',
+            'creations': 'créations',
             'medium': 'Moyen',
             'technologies': 'Technologies:',
 
@@ -757,6 +762,8 @@ function translatePageContent(langCode) {
             'judo-title': 'Judo Boucherville',
             'judo-desc': 'Complete website for a judo club with athlete management, events, competitions, registrations, shop and live streaming',
             'downloads': 'downloads',
+            'users': 'users',
+            'creations': 'creations',
             'medium': 'Medium',
             'technologies': 'Technologies:',
 
@@ -933,6 +940,42 @@ async function fetchLitematicDownloads() {
         const downloadElement = document.getElementById('litematic-downloads');
         if (downloadElement) {
             downloadElement.textContent = '-';
+        }
+    }
+}
+
+// Function to fetch and display Choculaterie user and schematic counts
+async function fetchChoculaterieStats() {
+    try {
+        const response = await fetch('https://choculaterie.com/api/user-schematic-stats');
+        const data = await response.json();
+        const { userCount, schematicCount } = data;
+        
+        // Format the numbers with commas for better readability
+        const formattedUserCount = userCount.toLocaleString();
+        const formattedSchematicCount = schematicCount.toLocaleString();
+        
+        // Update the counts in the DOM
+        const userElement = document.getElementById('choculaterie-users');
+        const schematicElement = document.getElementById('choculaterie-schematics');
+        
+        if (userElement) {
+            userElement.textContent = formattedUserCount;
+        }
+        if (schematicElement) {
+            schematicElement.textContent = formattedSchematicCount;
+        }
+    } catch (error) {
+        console.error('Error fetching Choculaterie stats:', error);
+        // Fallback to show dashes if API call fails
+        const userElement = document.getElementById('choculaterie-users');
+        const schematicElement = document.getElementById('choculaterie-schematics');
+        
+        if (userElement) {
+            userElement.textContent = '-';
+        }
+        if (schematicElement) {
+            schematicElement.textContent = '-';
         }
     }
 }
