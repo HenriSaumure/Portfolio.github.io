@@ -497,6 +497,9 @@ document.addEventListener('DOMContentLoaded', (event) => {
     // Initialize contact protection after DOM is loaded
     initContactProtection();
 
+    // Fetch OpenNotification count via WebSocket
+    fetchOpenNotificationCount();
+
     // Fetch Litematic Downloader mod download count
     fetchLitematicDownloads();
 
@@ -590,6 +593,11 @@ document.addEventListener('DOMContentLoaded', (event) => {
             }
         });
     }
+    
+    // Add cleanup for WebSocket when page unloads
+    window.addEventListener('beforeunload', () => {
+        closeNotificationWebSocket();
+    });
 });
 
 function getRandomChar() {
@@ -694,6 +702,7 @@ function translatePageContent(langCode) {
             'downloads': 'téléchargements',
             'users': 'utilisateurs',
             'creations': 'créations',
+            'notifications': 'notifications',
             'medium': 'Moyen',
             'technologies': 'Technologies:',
 
@@ -764,6 +773,7 @@ function translatePageContent(langCode) {
             'downloads': 'downloads',
             'users': 'users',
             'creations': 'creations',
+            'notifications': 'notifications',
             'medium': 'Medium',
             'technologies': 'Technologies:',
 
@@ -917,6 +927,114 @@ function initContactProtection() {
     }
 
     console.log('Direct contact display initialized'); // Debug log
+}
+
+// Global variable to store the WebSocket connection
+let notificationWebSocket = null;
+
+// Function to connect to OpenNotification WebSocket and get live notification count
+async function fetchOpenNotificationCount() {
+    console.log('Attempting to connect to OpenNotification WebSocket...');
+    
+    // Close existing connection if any
+    if (notificationWebSocket && notificationWebSocket.readyState === WebSocket.OPEN) {
+        notificationWebSocket.close();
+    }
+    
+    try {
+        // Create WebSocket connection to the notification count endpoint
+        notificationWebSocket = new WebSocket('wss://api.opennotification.org/ws/count');
+        
+        // Connection opened
+        notificationWebSocket.onopen = function(event) {
+            console.log('WebSocket connection opened to OpenNotification - Live updates enabled');
+        };
+        
+        // Listen for messages (live updates)
+        notificationWebSocket.onmessage = function(event) {
+            try {
+                const data = JSON.parse(event.data);
+                console.log('Received live notification count update:', data);
+                
+                // Extract the count from the response
+                const notificationCount = data.count || data.totalNotifications || data.notifications || 0;
+                
+                // Format the number with commas for better readability
+                const formattedCount = notificationCount.toLocaleString();
+                
+                // Update the notification count in the DOM
+                const countElement = document.getElementById('opennotification-count');
+                if (countElement) {
+                    countElement.textContent = formattedCount;
+                    console.log('Live updated notification count to:', formattedCount);
+                }
+                
+                // Keep the connection open for future updates - don't close!
+                
+            } catch (parseError) {
+                console.error('Error parsing WebSocket message:', parseError);
+                // Try to use the raw data if it's a simple number
+                const rawData = event.data;
+                if (!isNaN(rawData)) {
+                    const formattedCount = parseInt(rawData).toLocaleString();
+                    const countElement = document.getElementById('opennotification-count');
+                    if (countElement) {
+                        countElement.textContent = formattedCount;
+                        console.log('Live updated notification count to:', formattedCount);
+                    }
+                }
+                // Keep the connection open even if parsing fails
+            }
+        };
+        
+        // Handle connection errors
+        notificationWebSocket.onerror = function(error) {
+            console.error('WebSocket error:', error);
+            // Fallback to show a dash if WebSocket fails
+            const countElement = document.getElementById('opennotification-count');
+            if (countElement) {
+                countElement.textContent = '-';
+            }
+        };
+        
+        // Handle connection close
+        notificationWebSocket.onclose = function(event) {
+            if (event.wasClean) {
+                console.log('WebSocket connection closed cleanly');
+            } else {
+                console.log('WebSocket connection closed unexpectedly - attempting to reconnect in 5 seconds');
+                // Attempt to reconnect after 5 seconds if connection closed unexpectedly
+                setTimeout(() => {
+                    console.log('Attempting to reconnect WebSocket...');
+                    fetchOpenNotificationCount();
+                }, 5000);
+            }
+        };
+        
+        // Remove the timeout that was closing the connection - we want it to stay open!
+        
+    } catch (error) {
+        console.error('Error creating WebSocket connection:', error);
+        // Fallback to show a dash if WebSocket creation fails
+        const countElement = document.getElementById('opennotification-count');
+        if (countElement) {
+            countElement.textContent = '-';
+        }
+        
+        // Retry connection after 10 seconds
+        setTimeout(() => {
+            console.log('Retrying WebSocket connection...');
+            fetchOpenNotificationCount();
+        }, 10000);
+    }
+}
+
+// Function to close the WebSocket connection when page unloads
+function closeNotificationWebSocket() {
+    if (notificationWebSocket && notificationWebSocket.readyState === WebSocket.OPEN) {
+        console.log('Closing WebSocket connection');
+        notificationWebSocket.close();
+    }
 }
 
 // Function to fetch and display Litematic Downloader mod download count
