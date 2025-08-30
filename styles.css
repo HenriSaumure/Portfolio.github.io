@@ -621,10 +621,23 @@ nav li {
 /* Project Boxes */
 .project-box-container {
     display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
     gap: 30px;
     margin: 0 auto;
+    max-width: 1200px;
+}
+
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+    flex: 1;
+}
+
+@media (max-width: 768px) {
+    .project-box-container {
+        flex-direction: column;
+        gap: 20px;
+    }
 }
 
 .project-box-link {
@@ -632,15 +645,7 @@ nav li {
     color: inherit;
     display: block;
     width: 100%;
-    max-width: 550px;
-    margin: 0 auto;
     cursor: pointer;
-}
-
-@media (min-width: 992px) {
-    .project-box-link {
-        max-width: 45%;
-    }
 }
 
 .project-box {
@@ -664,16 +669,19 @@ nav li {
 .project-tech {
     margin-top: 15px;
     border-top: 1px solid #D3D3D3;
-    padding-top: 15px;
+    padding-top: 0;
+    padding-bottom: 0;
     opacity: 0;
-    height: 0;
+    max-height: 0;
     overflow: hidden;
     transition: all 0.4s ease;
 }
 
 .project-box:hover .project-tech {
     opacity: 1;
-    height: auto;
+    max-height: 200px;
+    padding-top: 15px;
+    padding-bottom: 10px;
 }
 
 .project-box h3 {
@@ -1872,6 +1880,10 @@ nav li {
         margin-bottom: 20px;
     }
 
+    .column {
+        display: contents;
+    }
+
     .project-box-link {
         max-width: 100%;
     }
@@ -2070,6 +2082,10 @@ nav li {
     .project-box-container {
         flex-direction: column;
         align-items: center;
+    }
+
+    .column {
+        display: contents;
     }
 
     .project-box-link {
