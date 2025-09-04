@@ -735,7 +735,10 @@ function translatePageContent(langCode) {
             'email': 'Email',
             'phone': 'Téléphone',
             'show-email': 'Afficher l\'email',
-            'show-phone': 'Afficher le téléphone'
+            'show-phone': 'Afficher le téléphone',
+            'linkedin': 'LinkedIn',
+            'resume': 'CV',
+            'download-cv': 'Ouvrir le CV'
         },
         'en': {
             // Add page title
@@ -806,7 +809,10 @@ function translatePageContent(langCode) {
             'email': 'Email',
             'phone': 'Phone',
             'show-email': 'Show email',
-            'show-phone': 'Show phone'
+            'show-phone': 'Show phone',
+            'linkedin': 'LinkedIn',
+            'resume': 'Resume',
+            'download-cv': 'Open Resume'
         }
     };
 
